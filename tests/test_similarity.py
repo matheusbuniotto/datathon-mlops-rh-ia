@@ -15,8 +15,14 @@ def sample_data():
         "emb_vaga": [[0.1]*384]*3,
         "emb_cv": [[0.1]*384, [0.2]*384, [0.3]*384],
         "nivel_profissional": ["Pleno", "Sênior", "Júnior"],
-        "area_atuacao": ["Dados", "Infra", "Dados"],
-        "email": ["ana@gmail.com", "bruno@hotmail.com", "clara@uol.com"]
+        "emb_vaga_areas_atuacao": [[0.1]*384]*3,
+        "emb_candidato_area_atuacao": [[0.1]*384, [0.2]*384, [0.3]*384],  
+        "candidato_area_atuacao": ["Dados", "Infra", "Dados"],        
+        "email": ["ana@gmail.com", "bruno@hotmail.com", "clara@uol.com"],
+        "similaridade_vaga_cv": [0.9, 0.8, 0.7],
+        "similaridade_area": [0.85, 0.75, 0.65],
+        "similaridade_combinada": [0.875, 0.775, 0.675],
+        "similaridade": [0.9, 0.8, 0.7]
     })
 
 
@@ -24,7 +30,7 @@ def test_recommendation_top_1(sample_data):
     result = recommend_candidates_for_vaga(sample_data, codigo_vaga=1, top_n=1)
     assert not result.empty
     assert result.iloc[0]["applicants_codigo_candidato"] in [101, 102, 103]
-    assert "similaridade" in result.columns
+    assert "similaridade_combinada" in result.columns
 
 
 def test_invalid_vaga_raises(sample_data):
