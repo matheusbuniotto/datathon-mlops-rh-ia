@@ -9,7 +9,6 @@ def recommend_candidates_for_vaga(df: pd.DataFrame, codigo_vaga: int, top_n: int
     Calcula a similaridade entre uma vaga e todos os candidatos e retorna os top_n recomendados.
     """
 
-    logger.info(f"Colunas do DataFrame: {df.columns.tolist()}")
     logger.info(f"Buscando vaga com id {codigo_vaga}")
     vaga_row = df[df["codigo_vaga"] == codigo_vaga]
 
@@ -31,8 +30,8 @@ def recommend_candidates_for_vaga(df: pd.DataFrame, codigo_vaga: int, top_n: int
     df_result["similaridade_area"] = similarities_area
 
     # Combina as similaridades com pesos
-    peso_cv = 0.4
-    peso_area = 0.6
+    peso_cv = 0.9
+    peso_area = 0.1
     df_result["similaridade_combinada"] = (
         peso_cv * df_result["similaridade_vaga_cv"] + peso_area * df_result["similaridade_area"]
     )
@@ -45,7 +44,8 @@ def recommend_candidates_for_vaga(df: pd.DataFrame, codigo_vaga: int, top_n: int
     logger.success(f"Top-{top_n} candidatos recomendados para vaga {codigo_vaga}.")
 
     return df_top[[
-        "codigo_vaga", "applicants_codigo_candidato", "nome_candidato", "email", "nivel_profissional",
+        
+        "codigo_vaga", "applicants_codigo_candidato", "nome_candidato", "email", "nivel_profissional","vaga_areas_atuacao",
         "candidato_area_atuacao", "similaridade_vaga_cv", "cv", "similaridade_area", "similaridade_combinada"
 
     ]]

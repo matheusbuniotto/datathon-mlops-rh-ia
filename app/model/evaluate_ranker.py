@@ -125,13 +125,13 @@ def comprehensive_evaluation(model_path, k=5, relevance_threshold=0):
     
     if results['validation']:
         val_ndcg = results['validation']['ndcg']
-        logger.info(f"🔧 VALIDAÇÃO (para desenvolvimento):")
+        logger.info("🔧 VALIDAÇÃO (para desenvolvimento):")
         logger.info(f"   NDCG@{k}: {val_ndcg:.4f}")
         logger.info(f"   MAP@{k}:  {results['validation']['map']:.4f}")
     
     if results['test']:
         test_ndcg = results['test']['ndcg']
-        logger.info(f"🎯 TESTE (performance final):")
+        logger.info("🎯 TESTE (performance final):")
         logger.info(f"   NDCG@{k}: {test_ndcg:.4f}")
         logger.info(f"   MAP@{k}:  {results['test']['map']:.4f}")
         

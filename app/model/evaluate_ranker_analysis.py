@@ -291,7 +291,7 @@ class RankingAnalyzer:
             
             if val_ndcg and test_ndcg:
                 diff = val_ndcg - test_ndcg
-                print(f"\n🎯 === ANÁLISE DE OVERFITTING ===")
+                print("\n🎯 === ANÁLISE DE OVERFITTING ===")
                 print(f"NDCG Validação: {val_ndcg:.4f}")
                 print(f"NDCG Teste: {test_ndcg:.4f}")
                 print(f"Diferença: {diff:+.4f}")
@@ -343,7 +343,7 @@ class RankingAnalyzer:
             plt.tight_layout()
             plt.show()
             
-            print(f"📊 Top 10 Features Mais Importantes:")
+            print("📊 Top 10 Features Mais Importantes:")
             for i, row in importance_df.head(10).iterrows():
                 print(f"{row['feature']}: {row['importance']:.0f}")
             

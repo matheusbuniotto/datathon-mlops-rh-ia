@@ -246,4 +246,4 @@ if __name__ == "__main__":
         json.dump(best_params, f, indent=2)
     
     logger.success(f"[Final] Modelo salvo em {MODEL_PATH}")
-    logger.info(f"[Final] Parâmetros salvos em app/model/best_params.json")
+    logger.info("[Final] Parâmetros salvos em app/model/best_params.json")
