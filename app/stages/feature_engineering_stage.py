@@ -4,12 +4,12 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from loguru import logger
-
 from app.constants import (
     NIVEL_PROFISSIONAL_ORDER,
     NIVEL_ACADEMICO_ORDER,
     NIVEL_INGLES_ORDER
 )
+
 
 def get_preprocessing_pipeline():
     # Define colunas
@@ -22,7 +22,7 @@ def get_preprocessing_pipeline():
     }
 
     categoricas = ["cliente", "recrutador"]
-    numericas = ["vaga_sap", "similaridade_vaga_cv", "similaridade_area", "similaridade_combinada"]
+    numericas = ["vaga_sap"]
 
     # Pipelines
     ordinal_pipeline = Pipeline([
@@ -46,26 +46,31 @@ def get_preprocessing_pipeline():
 
 def apply_feature_pipeline(df_train, df_val, df_test):
     logger.info("[Features] Aplicando transformações de encoding...")
+    
+    from app.utils.embedding_utils import explode_embeddings
 
-    # Get columns from pipeline definition
-    ordinais = [
-        "nivel_profissional",
-        "nivel_profissional_vaga",
-        "nivel_academico",
-        "nivel_ingles",
-        "nivel_ingles_vaga"
-    ]
-    categoricas = ["cliente", "recrutador", "estado"]
+    logger.info("[Features] Expandindo embeddings...")
+    df_train = explode_embeddings(df_train)
+    df_val = explode_embeddings(df_val)
+    df_test = explode_embeddings(df_test)
+    logger.success("[Features] Embeddings expandidos com sucesso.")
 
-    def fillna_cats(df):
-        for col in ordinais + categoricas:
-            if col in df.columns:
+    # Substituir missing values de acordo com o tipo de dados
+    def fill_missing(df):
+        # Fazer uma cópia para evitar SettingWithCopyWarning
+        df = df.copy()
+        
+        # Para cada coluna, preencher NA de acordo com o tipo
+        for col in df.columns:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                df[col] = df[col].fillna(-999) 
+            else:
                 df[col] = df[col].fillna("Indefinido")
         return df
 
-    df_train = fillna_cats(df_train)
-    df_val = fillna_cats(df_val)
-    df_test = fillna_cats(df_test)
+    df_train = fill_missing(df_train)
+    df_val = fill_missing(df_val)
+    df_test = fill_missing(df_test)
 
     y_train = df_train["target_rank"]
     y_val = df_val["target_rank"]
