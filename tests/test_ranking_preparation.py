@@ -13,4 +13,4 @@ def test_prepare_ranking_dataset():
 
     df_out = prepare_ranking_dataset(df)
     assert "target_rank" in df_out.columns
-    assert df_out["target_rank"].tolist() == [5, 0, 3, -1]
+    assert df_out["target_rank"].tolist() == [5, 0, 3, 0]

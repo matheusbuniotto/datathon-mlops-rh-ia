@@ -28,6 +28,7 @@ SITUACAO_TO_SCORE = {
     "Entrevista com Cliente": 3,
     "Entrevista Técnica": 2,
     "Em avaliação pelo RH": 2,
+    "Desistiu da Contratação": 2,
     "Encaminhado ao Requisitante": 1,
     "Inscrito": 1,
     "Prospect": 0,
@@ -35,8 +36,7 @@ SITUACAO_TO_SCORE = {
     "Não Aprovado pelo Requisitante": 0,
     "Não Aprovado pelo Cliente": 0,
     "Desistiu": 0,
-    "Desistiu da Contratação": 0,
     "Sem interesse nesta vaga": 0,
     "Recusado": 0,
-    None: -1
+    None: 0
 }
