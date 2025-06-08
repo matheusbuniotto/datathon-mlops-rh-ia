@@ -1,0 +1,41 @@
+# Ordens para OrdinalEncoder
+
+NIVEL_PROFISSIONAL_ORDER = [
+    "Aprendiz", "Trainee", "Auxiliar", "Assistente", "Técnico de Nível Médio", "Estagiário",
+    "Júnior", "Analista", "Pleno", "Especialista", "Líder", "Coordenador",
+    "Supervisor", "Sênior", "Gerente"
+]
+
+NIVEL_ACADEMICO_ORDER = [
+    "Ensino Fundamental Incompleto", "Ensino Fundamental Cursando", "Ensino Fundamental Completo",
+    "Ensino Médio Incompleto", "Ensino Médio Cursando", "Ensino Médio Completo",
+    "Ensino Técnico Incompleto", "Ensino Técnico Cursando", "Ensino Técnico Completo",
+    "Ensino Superior Incompleto", "Ensino Superior Cursando", "Ensino Superior Completo",
+    "Pós Graduação Incompleto", "Pós Graduação Cursando", "Pós Graduação Completo",
+    "Mestrado Incompleto", "Mestrado Cursando", "Mestrado Completo",
+    "Doutorado Incompleto", "Doutorado Cursando", "Doutorado Completo"
+]
+
+NIVEL_INGLES_ORDER = ["Nenhum", "Técnico", "Básico", "Intermediário", "Avançado", "Fluente"]
+
+SITUACAO_TO_SCORE = {
+    "Contratado pela Decision": 5,
+    "Contratado como Hunting": 5,
+    "Proposta Aceita": 4,
+    "Encaminhar Proposta": 4,
+    "Documentação CLT/PJ/Cooperado": 4,
+    "Aprovado": 3,
+    "Entrevista com Cliente": 3,
+    "Entrevista Técnica": 2,
+    "Em avaliação pelo RH": 2,
+    "Encaminhado ao Requisitante": 1,
+    "Inscrito": 1,
+    "Prospect": 0,
+    "Não Aprovado pelo RH": 0,
+    "Não Aprovado pelo Requisitante": 0,
+    "Não Aprovado pelo Cliente": 0,
+    "Desistiu": 0,
+    "Desistiu da Contratação": 0,
+    "Sem interesse nesta vaga": 0,
+    "Recusado": 0
+}
