@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from scipy import sparse
+import os
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
@@ -43,7 +45,21 @@ def get_preprocessing_pipeline():
 
     return ColumnTransformer(transformers=transformers)
 
+def save_model_input(X_train, y_train, group_train, X_val, y_val, group_val, X_test, y_test, group_test, path="data/model_input"):
+    os.makedirs(path, exist_ok=True)
 
+    sparse.save_npz(f"{path}/X_train.npz", X_train)
+    sparse.save_npz(f"{path}/X_val.npz", X_val)
+    sparse.save_npz(f"{path}/X_test.npz", X_test)
+
+    np.save(f"{path}/y_train.npy", y_train)
+    np.save(f"{path}/y_val.npy", y_val)
+    np.save(f"{path}/y_test.npy", y_test)
+
+    np.save(f"{path}/group_train.npy", group_train)
+    np.save(f"{path}/group_val.npy", group_val)
+    np.save(f"{path}/group_test.npy", group_test)
+    
 def apply_feature_pipeline(df_train, df_val, df_test):
     logger.info("[Features] Aplicando transformações de encoding...")
     
@@ -63,7 +79,7 @@ def apply_feature_pipeline(df_train, df_val, df_test):
         # Para cada coluna, preencher NA de acordo com o tipo
         for col in df.columns:
             if pd.api.types.is_numeric_dtype(df[col]):
-                df[col] = df[col].fillna(-999) 
+                df[col] = df[col].fillna(-999)
             else:
                 df[col] = df[col].fillna("Indefinido")
         return df
@@ -86,4 +102,12 @@ def apply_feature_pipeline(df_train, df_val, df_test):
     X_test = pipe.transform(df_test)
 
     logger.success("[Features] Pipeline de features aplicado com sucesso.")
+    
+    logger.info("[Features] Salvando input do modelo...")
+    save_model_input(X_train, y_train, group_train,
+                 X_val, y_val, group_val,
+                 X_test, y_test, group_test)
+
+    logger.success("[Features] Input do modelo salvo com sucesso.")
+    logger.info("[Features] Pipeline de features concluído.")
     return X_train, y_train, group_train, X_val, y_val, group_val, X_test, y_test, group_test, pipe
