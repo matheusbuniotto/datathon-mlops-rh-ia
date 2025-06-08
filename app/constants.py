@@ -37,5 +37,6 @@ SITUACAO_TO_SCORE = {
     "Desistiu": 0,
     "Desistiu da Contratação": 0,
     "Sem interesse nesta vaga": 0,
-    "Recusado": 0
+    "Recusado": 0,
+    None: -1
 }

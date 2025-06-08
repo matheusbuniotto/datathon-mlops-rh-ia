@@ -36,3 +36,5 @@ def test_recommendation_top_1(sample_data):
 def test_invalid_vaga_raises(sample_data):
     with pytest.raises(ValueError):
         recommend_candidates_for_vaga(sample_data, codigo_vaga=999, top_n=1)
+
+
