@@ -1,0 +1,109 @@
+=== FEATURES UTILIZADAS NO TREINAMENTO ===
+
+Total: 99 features
+Data de treinamento: 2025-06-08 21:54:40.945219
+
+FEATURES ORDINAIS:
+  - nivel_profissional
+  - nivel_profissional_vaga
+  - nivel_academico
+  - nivel_ingles
+  - nivel_ingles_vaga
+
+FEATURES NUMÉRICAS:
+  - vaga_sap
+  - area_similarity
+
+FEATURES CATEGÓRICAS:
+  - cliente_Barnes-Woods
+  - cliente_Bell Group
+  - cliente_Bishop-Reed
+  - cliente_Bowers, Oconnor and Williams
+  - cliente_Callahan-Hall
+  - cliente_Chapman, Brown and Hart
+  - cliente_Craig-Webb
+  - cliente_Dougherty-Gilbert
+  - cliente_Glover, Warren and Norris
+  - cliente_Gonzalez and Sons
+  - cliente_Griffith-Webb
+  - cliente_Jenkins-Walker
+  - cliente_Jimenez PLC
+  - cliente_Johnson-Aguirre
+  - cliente_Johnson-Pratt
+  - cliente_Jones-Hodges
+  - cliente_King-Russell
+  - cliente_Luna-Carpenter
+  - cliente_Mann and Sons
+  - cliente_Miller, Tran and Chang
+  - cliente_Miller-Curry
+  - cliente_Morris, Moran and Dodson
+  - cliente_Morrison Ltd
+  - cliente_Nelson-Page
+  - cliente_Porter-Wilson
+  - cliente_Wade, Bernard and Bailey
+  - cliente_Walters Group
+  - cliente_Williams, Clark and Lynn
+  - cliente_infrequent_sklearn
+  - recrutador_Agatha Montenegro
+  - recrutador_Ana Camargo
+  - recrutador_Ana Lívia Moreira
+  - recrutador_Ana Sophia Oliveira
+  - recrutador_Aylla Leão
+  - recrutador_Carlos Eduardo Ribeiro
+  - recrutador_Carolina Araújo
+  - recrutador_Caroline Machado
+  - recrutador_Clara Rios
+  - recrutador_Dr. Luan Sá
+  - recrutador_Dra. Luara Siqueira
+  - recrutador_Elisa Barbosa
+  - recrutador_Elisa Nunes
+  - recrutador_Eloah Leão
+  - recrutador_Emanuella Campos
+  - recrutador_Emanuelly Vieira
+  - recrutador_Helena Barros
+  - recrutador_Juliana Cassiano
+  - recrutador_Lara Duarte
+  - recrutador_Laura Pacheco
+  - recrutador_Liz Freitas
+  - recrutador_Luara Câmara
+  - recrutador_Luna Correia
+  - recrutador_Lunna Fonseca
+  - recrutador_Manuella Carvalho
+  - recrutador_Maria Clara Pires
+  - recrutador_Maria Vitória Machado
+  - recrutador_Mariah Vasconcelos
+  - recrutador_Mariane Moreira
+  - recrutador_Melina Montenegro
+  - recrutador_Natália Cavalcanti
+  - recrutador_Paulo Peixoto
+  - recrutador_Raquel Vieira
+  - recrutador_Sra. Giovanna Sousa
+  - recrutador_Sra. Joana Sousa
+  - recrutador_Sra. Manuella Oliveira
+  - recrutador_Srta. Bella Ferreira
+  - recrutador_Srta. Maria Carvalho
+  - recrutador_Stella Vieira
+  - recrutador_Yasmin da Rosa
+  - recrutador_Ágatha da Paz
+  - recrutador_infrequent_sklearn
+  - vaga_areas_atuacao_clean_Administrativa
+  - vaga_areas_atuacao_clean_Comercial
+  - vaga_areas_atuacao_clean_Financeira/Controladoria
+  - vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI
+  - vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_Desenvolvimento/Programação
+  - vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_Infraestrutura
+  - vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_SAP
+  - vaga_areas_atuacao_clean_Recursos_Humanos
+  - vaga_areas_atuacao_clean_TI_Arquitetura
+  - vaga_areas_atuacao_clean_TI_Banco_de_Dados
+  - vaga_areas_atuacao_clean_TI_Desenvolvimento/Design
+  - vaga_areas_atuacao_clean_TI_Desenvolvimento/Mobile
+  - vaga_areas_atuacao_clean_TI_Desenvolvimento/Programação
+  - vaga_areas_atuacao_clean_TI_Infraestrutura
+  - vaga_areas_atuacao_clean_TI_Processos_e_Negócios
+  - vaga_areas_atuacao_clean_TI_Projetos
+  - vaga_areas_atuacao_clean_TI_Qualidade/Testes
+  - vaga_areas_atuacao_clean_TI_SAP
+  - vaga_areas_atuacao_clean_TI_Sistemas_e_Ferramentas
+  - vaga_areas_atuacao_clean_TI_Suporte
+  - vaga_areas_atuacao_clean_infrequent_sklearn

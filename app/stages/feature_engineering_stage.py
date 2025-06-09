@@ -5,6 +5,7 @@ import os
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
+from joblib import dump
 from loguru import logger
 from fuzzywuzzy import fuzz
 from app.utils.strings_clean_utils import clean_area_atuacao
@@ -49,6 +50,48 @@ def get_preprocessing_pipeline():
 
     return ColumnTransformer(transformers=transformers)
 
+
+def get_feature_names_from_pipeline(pipeline, input_df):
+    """
+    Extrai os nomes das features após a transformação pelo pipeline
+    """
+    try:
+        feature_names = []
+        
+        # Para cada transformer no pipeline
+        for name, transformer, columns in pipeline.transformers_:
+            if name == "ordinal":
+                # Features ordinais mantêm os nomes originais
+                feature_names.extend(columns)
+                
+            elif name == "categorical":
+                # Features categóricas são expandidas com one-hot encoding
+                # Primeiro, precisamos ajustar o transformer com os dados
+                encoder = transformer.named_steps['encoder']
+                if hasattr(encoder, 'get_feature_names_out'):
+                    cat_features = encoder.get_feature_names_out(columns)
+                    feature_names.extend(cat_features.tolist())
+                else:
+                    # Fallback: usar as categorias do encoder
+                    for i, col in enumerate(columns):
+                        if hasattr(encoder, 'categories_') and i < len(encoder.categories_):
+                            for cat in encoder.categories_[i]:
+                                feature_names.append(f"{col}_{cat}")
+                        else:
+                            feature_names.append(f"{col}_encoded")
+                            
+            elif name == "passthrough":
+                # Features numéricas passam direto
+                feature_names.extend(columns)
+        
+        logger.info(f"[Features] Extraídos {len(feature_names)} nomes de features do pipeline")
+        return feature_names
+        
+    except Exception as e:
+        logger.error(f"[Features] Erro ao extrair nomes das features: {e}")
+        return None
+
+
 def calculate_area_similarity(df):
     """
     Calcula a similaridade fuzzy entre candidato_area_atuacao e vaga_areas_atuacao
@@ -71,7 +114,8 @@ def calculate_area_similarity(df):
     df['area_similarity'] = df.apply(fuzzy_similarity, axis=1)
     return df
 
-def save_model_input(X_train, y_train, group_train, X_val, y_val, group_val, X_test, y_test, group_test, path="data/model_input"):
+
+def save_model_input(X_train, y_train, group_train, X_val, y_val, group_val, X_test, y_test, group_test, feature_names=None, path="data/model_input"):
     os.makedirs(path, exist_ok=True)
 
     sparse.save_npz(f"{path}/X_train.npz", X_train)
@@ -86,6 +130,21 @@ def save_model_input(X_train, y_train, group_train, X_val, y_val, group_val, X_t
     np.save(f"{path}/group_val.npy", group_val)
     np.save(f"{path}/group_test.npy", group_test)
     
+    # Salvar nomes das features se disponíveis
+    if feature_names is not None:
+        # Salvar como array numpy
+        np.save(f"{path}/feature_names.npy", np.array(feature_names, dtype=object))
+        
+        # Salvar como JSON para fácil leitura
+        import json
+        with open(f"{path}/feature_names.json", "w", encoding='utf-8') as f:
+            json.dump(feature_names, f, indent=2, ensure_ascii=False)
+        
+        logger.info(f"[Features] Salvos {len(feature_names)} nomes de features em {path}")
+    else:
+        logger.warning("[Features] Nomes das features não disponíveis para salvar")
+
+
 def apply_feature_pipeline(df_train, df_val, df_test):
     logger.info("[Features] Aplicando transformações de encoding...")
     
@@ -149,17 +208,54 @@ def apply_feature_pipeline(df_train, df_val, df_test):
     group_val = df_val.groupby("codigo_vaga").size().values
     group_test = df_test.groupby("codigo_vaga").size().values
 
+    # Criar e ajustar o pipeline
     pipe = get_preprocessing_pipeline()
+    logger.info("[Features] Ajustando pipeline de transformação...")
     X_train = pipe.fit_transform(df_train)
     X_val = pipe.transform(df_val)
     X_test = pipe.transform(df_test)
 
+    # Extrair nomes das features após o ajuste
+    logger.info("[Features] Extraindo nomes das features...")
+    feature_names = get_feature_names_from_pipeline(pipe, df_train)
+    
+    # Salvar o pipeline para uso posterior
+    pipeline_path = "data/model_input/preprocessing_pipeline.pkl"
+    dump(pipe, pipeline_path)
+    logger.info(f"[Features] Pipeline salvo em {pipeline_path}")
+
     logger.success("[Features] Pipeline de features aplicado com sucesso.")
+    
+    # Log das informações das features
+    if feature_names:
+        logger.info(f"[Features] === RESUMO DAS FEATURES ===")
+        logger.info(f"[Features] Total de features: {len(feature_names)}")
+        logger.info(f"[Features] Shape da matriz: {X_train.shape}")
+        
+        # Categorizar features para melhor visualização
+        ordinal_features = [f for f in feature_names if any(nivel in f for nivel in ["nivel_profissional", "nivel_academico", "nivel_ingles"])]
+        numerical_features = [f for f in feature_names if f in ["vaga_sap", "area_similarity"]]
+        categorical_features = [f for f in feature_names if f not in ordinal_features and f not in numerical_features]
+        
+        logger.info(f"[Features] Features Ordinais ({len(ordinal_features)}): {ordinal_features}")
+        logger.info(f"[Features] Features Numéricas ({len(numerical_features)}): {numerical_features}")
+        logger.info(f"[Features] Features Categóricas: {len(categorical_features)}")
+        
+        # Mostrar algumas categóricas como exemplo
+        if categorical_features:
+            if len(categorical_features) <= 10:
+                logger.info(f"[Features] Categóricas: {categorical_features}")
+            else:
+                logger.info(f"[Features] Primeiras 10 categóricas: {categorical_features[:10]}")
+                logger.info(f"[Features] ... e mais {len(categorical_features) - 10} features categóricas")
+        
+        logger.info("[Features] =====================================")
     
     logger.info("[Features] Salvando input do modelo...")
     save_model_input(X_train, y_train, group_train,
-                 X_val, y_val, group_val,
-                 X_test, y_test, group_test)
+                     X_val, y_val, group_val,
+                     X_test, y_test, group_test,
+                     feature_names=feature_names)
 
     logger.success("[Features] Input do modelo salvo com sucesso.")
     logger.info("[Features] Pipeline de features concluído.")
