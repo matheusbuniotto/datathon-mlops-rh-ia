@@ -27,7 +27,7 @@ def get_preprocessing_pipeline():
 
     # Atualizar colunas categóricas - remover candidato_area_atuacao e adicionar vaga_areas_atuacao_clean
     categoricas = ["cliente", "recrutador", "vaga_areas_atuacao_clean"]
-    numericas = ["vaga_sap", "area_similarity"]  # Adicionar similarity à numericas
+    numericas = ["vaga_sap", "area_similarity"] 
 
     # Pipelines
     ordinal_pipeline = Pipeline([

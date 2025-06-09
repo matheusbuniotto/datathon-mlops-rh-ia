@@ -3,7 +3,7 @@ from sklearn.model_selection import GroupShuffleSplit
 from loguru import logger
 
 
-def split_dataset_by_vaga(df: pd.DataFrame, test_size=0.15, val_size=0.1, random_state=1993):
+def split_dataset_by_vaga(df: pd.DataFrame, test_size=0.1, val_size=0.1, random_state=1993):
     logger.info("[Split] Iniciando divisão do dataset por vaga...")
 
     gss = GroupShuffleSplit(n_splits=1, test_size=test_size, random_state=random_state)

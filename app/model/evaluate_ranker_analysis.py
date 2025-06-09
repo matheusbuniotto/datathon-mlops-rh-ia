@@ -419,7 +419,7 @@ def show_feature_importance():
 if __name__ == "__main__":
     # Executar análise completa
     main()
-    quick_comparison()
+    analyze_validation_only()
     
     print("\n" + "="*60)
     print("✅ ANÁLISE CONCLUÍDA!")
@@ -428,4 +428,3 @@ if __name__ == "__main__":
     print("   • analyze_validation_only() - análise detalhada validação")  
     print("   • show_feature_importance() - importância features")
     print("="*60)
-    show_feature_importance()

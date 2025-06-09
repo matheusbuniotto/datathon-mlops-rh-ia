@@ -36,3 +36,6 @@ LEFT JOIN read_parquet('data/processed/prospects.parquet') p
     ON v.codigo_vaga = p.codigo_vaga
 LEFT JOIN read_parquet('data/processed/applicants.parquet') a
     ON p.codigo_candidato = a.codigo_candidato
+
+WHERE a.codigo_candidato IS NOT NULL
+GROUP BY ALL
