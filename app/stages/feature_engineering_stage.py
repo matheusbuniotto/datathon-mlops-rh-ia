@@ -6,6 +6,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from loguru import logger
+from fuzzywuzzy import fuzz
+from app.utils.strings_clean_utils import clean_area_atuacao
 from app.constants import (
     NIVEL_PROFISSIONAL_ORDER,
     NIVEL_ACADEMICO_ORDER,
@@ -23,8 +25,9 @@ def get_preprocessing_pipeline():
         "nivel_ingles_vaga": NIVEL_INGLES_ORDER
     }
 
-    categoricas = ["cliente", "recrutador"]
-    numericas = ["vaga_sap"]
+    # Atualizar colunas categóricas - remover candidato_area_atuacao e adicionar vaga_areas_atuacao_clean
+    categoricas = ["cliente", "recrutador", "vaga_areas_atuacao_clean"]
+    numericas = ["vaga_sap", "area_similarity"]  # Adicionar similarity à numericas
 
     # Pipelines
     ordinal_pipeline = Pipeline([
@@ -33,8 +36,9 @@ def get_preprocessing_pipeline():
                                    unknown_value=-1))
     ])
 
+    # Pipeline categórico com min_frequency=100 para vaga_areas_atuacao_clean
     categorical_pipeline = Pipeline([
-        ("encoder", OneHotEncoder(handle_unknown="ignore", min_frequency=500))
+        ("encoder", OneHotEncoder(handle_unknown="ignore", min_frequency=100))
     ])
 
     transformers = [
@@ -44,6 +48,28 @@ def get_preprocessing_pipeline():
     ]
 
     return ColumnTransformer(transformers=transformers)
+
+def calculate_area_similarity(df):
+    """
+    Calcula a similaridade fuzzy entre candidato_area_atuacao e vaga_areas_atuacao
+    usando .lower() para ambas as colunas
+    """
+    # Criar uma cópia do DataFrame para evitar fragmentação
+    df = df.copy()
+    
+    def fuzzy_similarity(row):
+        candidato_area = str(row['candidato_area_atuacao']).lower()
+        vaga_area = str(row['vaga_areas_atuacao']).lower()
+        
+        # Se alguma das áreas for vazia ou indefinida, retorna 0
+        if candidato_area in ['nan', 'indefinido', ''] or vaga_area in ['nan', 'indefinido', '']:
+            return 0
+        
+        # Calcula a similaridade usando fuzzywuzzy
+        return fuzz.ratio(candidato_area, vaga_area)
+    
+    df['area_similarity'] = df.apply(fuzzy_similarity, axis=1)
+    return df
 
 def save_model_input(X_train, y_train, group_train, X_val, y_val, group_val, X_test, y_test, group_test, path="data/model_input"):
     os.makedirs(path, exist_ok=True)
@@ -87,6 +113,33 @@ def apply_feature_pipeline(df_train, df_val, df_test):
     df_train = fill_missing(df_train)
     df_val = fill_missing(df_val)
     df_test = fill_missing(df_test)
+
+    # Aplicar limpeza de strings das colunas de área de atuação
+    logger.info("[Features] Limpando colunas de área de atuação...")
+    
+    # Fazer uma cópia dos DataFrames para evitar fragmentação
+    df_train = df_train.copy()
+    df_val = df_val.copy()
+    df_test = df_test.copy()
+    
+    # Limpar candidato_area_atuacao
+    df_train['candidato_area_atuacao'] = clean_area_atuacao(df_train, 'candidato_area_atuacao')
+    df_val['candidato_area_atuacao'] = clean_area_atuacao(df_val, 'candidato_area_atuacao')
+    df_test['candidato_area_atuacao'] = clean_area_atuacao(df_test, 'candidato_area_atuacao')
+    
+    # Limpar vaga_areas_atuacao e criar coluna limpa para encoding
+    df_train['vaga_areas_atuacao_clean'] = clean_area_atuacao(df_train, 'vaga_areas_atuacao')
+    df_val['vaga_areas_atuacao_clean'] = clean_area_atuacao(df_val, 'vaga_areas_atuacao')
+    df_test['vaga_areas_atuacao_clean'] = clean_area_atuacao(df_test, 'vaga_areas_atuacao')
+    
+    logger.success("[Features] Colunas de área de atuação limpas com sucesso.")
+    
+    # Calcular similaridade fuzzy entre as áreas
+    logger.info("[Features] Calculando similaridade entre áreas de atuação...")
+    df_train = calculate_area_similarity(df_train)
+    df_val = calculate_area_similarity(df_val)
+    df_test = calculate_area_similarity(df_test)
+    logger.success("[Features] Similaridade entre áreas calculada com sucesso.")
 
     y_train = df_train["target_rank"]
     y_val = df_val["target_rank"]

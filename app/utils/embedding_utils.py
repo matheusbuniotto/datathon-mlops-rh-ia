@@ -11,12 +11,10 @@ def explode_embeddings(df: pd.DataFrame) -> pd.DataFrame:
 
     emb_vaga_df = explode_column(df, "emb_vaga", "emb_vaga")
     emb_cv_df = explode_column(df, "emb_cv", "emb_cv")
-    emb_vaga_area_df = explode_column(df, "emb_vaga_areas_atuacao", "emb_vaga_atuacao")
-    emb_cv_area_df = explode_column(df, "emb_candidato_area_atuacao", "emb_candidato_atuacao")
 
     df = df.drop(columns=[
         "emb_vaga", "emb_cv",
-        "emb_vaga_areas_atuacao", "emb_candidato_area_atuacao"
     ])
 
-    return pd.concat([df, emb_vaga_df, emb_cv_df, emb_vaga_area_df, emb_cv_area_df], axis=1)
+    return pd.concat([df, emb_vaga_df, emb_cv_df], axis=1)
+

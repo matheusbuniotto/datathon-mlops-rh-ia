@@ -1,4 +1,4 @@
-def clean_vaga_areas_atuacao(df, column_name='vaga_areas_atuacao'):
+def clean_area_atuacao(df, column_name='vaga_areas_atuacao'):
     """
     Limpa as strings de uma coluna específica de um DataFrame,
     substituindo espaços e hífens por underlines, removendo espaços extras

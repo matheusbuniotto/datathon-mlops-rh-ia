@@ -1,7 +1,9 @@
 import json
 from typing import Any, Dict, List
 import pandas as pd
+from logaru import logger
 
+logger = logger.bind(name="data_loader")
 
 def clean_empty_values(value: Any) -> str:
     """Sanitize null-like values (None, empty string, etc.)."""

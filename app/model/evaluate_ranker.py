@@ -146,7 +146,7 @@ def comprehensive_evaluation(model_path, k=5, relevance_threshold=0):
                 logger.info(f"🤔 Teste melhor que validação (diff: {diff:+.4f})")
     
     # Salva resultados
-    results_path = "app/model/evaluation_results.json"
+    results_path = "app/model/model_params/evaluation_results.json"
     with open(results_path, 'w') as f:
         json.dump(results, f, indent=2)
     logger.info(f"📁 Resultados salvos em: {results_path}")
