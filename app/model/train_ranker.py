@@ -2,12 +2,13 @@ import lightgbm as lgb
 import numpy as np
 from scipy import sparse
 import os
-from joblib import dump, load
+from joblib import dump
 from loguru import logger
 import json
 
 DATA_PATH = "data/model_input/"
 MODEL_PATH = "app/model/lgbm_ranker.pkl"
+MODEL_PATH_PROD = "models/lgbm_ranker.pkl"
 PIPELINE_PATH = "data/model_input/preprocessing_pipeline.pkl"
 
 
@@ -218,6 +219,9 @@ if __name__ == "__main__":
     # Salva modelo
     dump(model, MODEL_PATH)
     logger.info(f"[LightGBM] Modelo salvo em {MODEL_PATH}")
+    
+    dump(model, MODEL_PATH_PROD)
+    logger.info(f"[LightGBM] Modelo PROD  salvo em {MODEL_PATH_PROD}")
     
     # Salva parâmetros usados para referência
     with open("app/model/params_used_last_train.json", "w") as f:

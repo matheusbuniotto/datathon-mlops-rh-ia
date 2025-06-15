@@ -1,7 +1,7 @@
 === FEATURES UTILIZADAS NO TREINAMENTO ===
 
 Total: 249 features
-Data de treinamento: 2025-06-09 21:09:44.578743
+Data de treinamento: 2025-06-09 21:23:55.986273
 
 FEATURES ORDINAIS:
   - nivel_profissional

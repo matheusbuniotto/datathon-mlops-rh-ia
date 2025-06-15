@@ -1,5 +1,6 @@
 from app.pipeline import run_pipeline
 from app.stages.feature_engineering_stage import apply_feature_pipeline
+from app.model.save_pipeline import save_dataset_for_prediction
 import pandas as pd
 
 def run_model_pipeline():
@@ -20,3 +21,4 @@ def run_model_pipeline():
 if __name__ == "__main__":
     run_pipeline()
     run_model_pipeline()
+    save_dataset_for_prediction()
