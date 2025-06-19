@@ -97,3 +97,4 @@ tzdata==2025.2
 urllib3==2.4.0
 uvicorn==0.34.3
 wcwidth==0.2.13
+prometheus-fastapi-instrumentator>=6.0.0
