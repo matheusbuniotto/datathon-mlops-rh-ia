@@ -1,6 +1,8 @@
 data/raw/
 *.parquet
 *.json
+todo.md
+test_payload.json
 
 # Ignore Python cache files
 __pycache__/
