@@ -74,7 +74,8 @@ def predict_rank_for_vaga(df_candidates: pd.DataFrame,
         # 7. Cria DataFrame com resultados
         results_df = pd.DataFrame({
             'nome_candidato': df_vaga['nome_candidato'],
-            'score': predictions
+            'score': np.round(predictions, 3),
+            'rank': predictions.argsort() + 1 
         })
         
         # 8. Ordena por score e pega top N candidatos
