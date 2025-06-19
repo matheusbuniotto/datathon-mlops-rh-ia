@@ -1,32 +1,48 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from services.api.routes import router as recommend_router
 from loguru import logger
 from prometheus_fastapi_instrumentator import Instrumentator
-from prometheus_client import Counter
+from prometheus_client import Counter, Histogram
+import time
 
 app = FastAPI(title="RecrutaIA Rank API", version="1.0")
 
-# Custom metric for model predictions
 MODEL_PREDICTIONS = Counter(
     "model_predictions_total",
     "Total number of model predictions",
     ["model_type"]
 )
 
-# FIX: Instrumentator fora 
+API_REQUESTS_TOTAL = Counter(
+    "api_requests_total",
+    "Total API requests",
+    ["method", "endpoint"]
+)
+
+API_REQUEST_DURATION_SECONDS = Histogram(
+    "api_request_duration_seconds",
+    "API request duration in seconds",
+    ["method", "endpoint"]
+)
+
+# Instrumentator exposes metrics at /metrics
 Instrumentator().instrument(app).expose(app, endpoint="/metrics", include_in_schema=False)
+
+@app.middleware("http")
+async def prometheus_metrics_middleware(request: Request, call_next):
+    method = request.method
+    endpoint = request.url.path
+    start_time = time.time()
+    response = await call_next(request)
+    duration = time.time() - start_time
+    API_REQUESTS_TOTAL.labels(method=method, endpoint=endpoint).inc()
+    API_REQUEST_DURATION_SECONDS.labels(method=method, endpoint=endpoint).observe(duration)
+    return response
 
 @app.get("/health")
 def health_check():
     logger.info("[API] Health check OK")
     return {"status": "ok"}
 
-@app.get("/predict")
-def predict():
-    # ... your prediction logic ...
-    MODEL_PREDICTIONS.labels(model_type="ranking").inc()
-    return {"result": "ok"}
-
-# Include recommendation routes
 debug_prefix = "/v1"
 app.include_router(recommend_router, prefix=debug_prefix)
