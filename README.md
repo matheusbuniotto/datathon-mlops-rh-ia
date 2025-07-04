@@ -61,7 +61,7 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 - Custom business metrics (can be extended)
 
 ## Notebooks
-
+!! CAUTION !! These are used for exploration porpose only.
 - `notebooks/embeding_check.ipynb`: Embedding and feature pipeline checks
 - `notebooks/mock_data_test.ipynb`: Mock data and prediction pipeline tests
 
@@ -102,6 +102,6 @@ docker-compose up
 ## Example API Call
 
 ```bash
-curl "http://localhost:8000/predict"
+curl "http://localhost:8000/v1/recommend_ranked`"
 ```
 

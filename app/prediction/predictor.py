@@ -11,6 +11,44 @@ from typing import List, Dict, Any
 from app.utils.embedding_utils import explode_embeddings
 from app.stages.feature_engineering_stage import calculate_area_similarity
 from app.utils.strings_clean_utils import clean_area_atuacao
+import json
+from scipy.stats import ks_2samp, chi2_contingency
+from prometheus_client import Gauge
+
+# Prometheus metrics for data drift
+DATA_DRIFT_GAUGE = Gauge(
+    "data_drift_p_value",
+    "P-value for data drift detection tests",
+    ["feature", "test_type"]
+)
+
+def detect_data_drift(df_new: pd.DataFrame, reference_profile_path: str):
+    """
+    Detects data drift by comparing the new data with a reference profile.
+    """
+    logger.info("Checking for data drift...")
+    with open(reference_profile_path, 'r') as f:
+        reference_profile = json.load(f)
+
+    for feature, profile in reference_profile["numerical"].items():
+        if feature in df_new.columns:
+            p_value = ks_2samp(df_new[feature], np.random.normal(profile["mean"], profile["std"], len(df_new[feature])))[1]
+            DATA_DRIFT_GAUGE.labels(feature=feature, test_type="ks").set(p_value)
+            if p_value < 0.05:
+                logger.warning(f"Data drift detected for numerical feature '{feature}' (p-value: {p_value:.4f})")
+
+    for feature, profile in reference_profile["categorical"].items():
+        if feature in df_new.columns:
+            # Create contingency table
+            observed_counts = df_new[feature].value_counts().reindex(profile.keys(), fill_value=0)
+            expected_counts = pd.Series(profile) * len(df_new)
+            contingency_table = pd.DataFrame([observed_counts, expected_counts]).T
+            
+            # Chi-squared test
+            _, p_value, _, _ = chi2_contingency(contingency_table)
+            DATA_DRIFT_GAUGE.labels(feature=feature, test_type="chi2").set(p_value)
+            if p_value < 0.05:
+                logger.warning(f"Data drift detected for categorical feature '{feature}' (p-value: {p_value:.4f})")
 
 def predict_rank_for_vaga(df_candidates: pd.DataFrame, 
                          vaga_id: int, 
@@ -67,6 +105,11 @@ def predict_rank_for_vaga(df_candidates: pd.DataFrame,
         logger.info("Aplicando transformações do pipeline...")
         X_processed = pipe.transform(df_vaga)
         
+        # Data Drift Detection
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+        reference_profile_path = os.path.join(project_root, "data/monitoring/reference_profile.json")
+        detect_data_drift(pd.DataFrame(X_processed, columns=pipe.get_feature_names_out()), reference_profile_path)
+
         # 6. Faz predições
         logger.info("Fazendo predições...")
         predictions = model.predict(X_processed)
@@ -92,16 +135,3 @@ def predict_rank_for_vaga(df_candidates: pd.DataFrame,
     except Exception as e:
         logger.error(f"Erro ao gerar ranking para vaga {vaga_id}: {str(e)}")
         raise e
-
-# Add this at the bottom for testing:
-if __name__ == "__main__":
-    # Test the predictor
-    data_path = "data/final/test_candidates_raw.parquet"
-    test_df = pd.read_parquet(data_path)
-    vaga_id_teste = test_df['codigo_vaga'].iloc[0]
-    
-    resultado = predict_rank_for_vaga(
-        df_candidates=test_df,
-        vaga_id=vaga_id_teste,
-    )
-    print(resultado)
