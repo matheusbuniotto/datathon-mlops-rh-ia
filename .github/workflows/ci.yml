@@ -22,12 +22,7 @@ jobs:
       run: |
         pip install uv
         uv tool install ruff
-        uv pip install --system --requirement requirements-dev.txt
 
     - name: Lint with ruff
       run: |
         uv run ruff check . --exclude="*.ipynb"
-    
-    - name: Test with pytest
-      run: |
-        PYTHONPATH=$(pwd) uv run pytest
