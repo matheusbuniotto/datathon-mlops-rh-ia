@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install uv
+        uv pip install --system --requirement requirements-dev.txt
+
+    - name: Lint with ruff
+      run: |
+        uv run ruff check .
+    
+    - name: Test with pytest
+      run: |
+        uv run pytest
