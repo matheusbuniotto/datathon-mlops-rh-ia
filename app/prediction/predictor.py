@@ -117,15 +117,15 @@ def predict_rank_for_vaga(df_candidates: pd.DataFrame,
         # 7. Cria DataFrame com resultados
         results_df = pd.DataFrame({
             'nome_candidato': df_vaga['nome_candidato'],
-            'score': np.round(predictions, 3),
-            'rank': predictions.argsort() + 1 
+            'score': np.round(predictions, 3)
         })
-        
-        # 8. Ordena por score e pega top N candidatos
-        top_candidates = (results_df.sort_values('score', ascending=False)
-                        .head(top_n)
-                        .to_dict('records'))
-        
+
+        # Ordena por score decrescente e atribui rank (1 para maior score)
+        results_df = results_df.sort_values('score', ascending=False).reset_index(drop=True)
+        results_df['rank'] = results_df.index + 1
+
+        # 8. Pega top N candidatos
+        top_candidates = results_df.head(top_n).to_dict('records')
         logger.success(f"Ranking gerado com sucesso para vaga {vaga_id}")
         return {
             "vaga_id": vaga_id,
