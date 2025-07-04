@@ -102,6 +102,7 @@ docker-compose up
 ## Example API Call
 
 ```bash
-curl "http://localhost:8000/v1/recommend_ranked`"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=6647&top_n=10"
 ```
 
