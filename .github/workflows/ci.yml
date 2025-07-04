@@ -21,6 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install uv
+        uv tool install ruff
         uv pip install --system --requirement requirements-dev.txt
 
     - name: Lint with ruff
