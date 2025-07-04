@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 from joblib import load
 from loguru import logger
-from typing import List, Dict, Any
+from typing import Dict, Any
 from app.utils.embedding_utils import explode_embeddings
 from app.stages.feature_engineering_stage import calculate_area_similarity
 from app.utils.strings_clean_utils import clean_area_atuacao

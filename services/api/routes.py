@@ -1,6 +1,5 @@
 # services/api/routes.py
 from fastapi import APIRouter, Query, HTTPException
-from services.api.model_loader import load_model
 import pandas as pd
 from loguru import logger
 from app.prediction.predictor import predict_rank_for_vaga

@@ -10,7 +10,7 @@ def clean_empty_values(value: Any) -> str:
 
 def process_applicant_record(app_id: str, app_data: Dict[str, Any]) -> Dict[str, Any]:
     basic_info = app_data.get("infos_basicas", {})
-    personal_info = app_data.get("informacoes_pessoais", {})
+    app_data.get("informacoes_pessoais", {})
     professional_info = app_data.get("informacoes_profissionais", {})
     education_info = app_data.get("formacao_e_idiomas", {})
 

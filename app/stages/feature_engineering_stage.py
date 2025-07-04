@@ -205,7 +205,7 @@ def apply_feature_pipeline(df_train, df_val, df_test):
     logger.success("[Features] Feature pipeline applied successfully.")
     
     if feature_names:
-        logger.info(f"[Features] === FEATURE SUMMARY ===")
+        logger.info("[Features] === FEATURE SUMMARY ===")
         logger.info(f"[Features] Total features: {len(feature_names)}")
         logger.info(f"[Features] Matrix shape: {X_train.shape}")
         
