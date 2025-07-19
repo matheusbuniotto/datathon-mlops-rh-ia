@@ -26,6 +26,13 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
+# Python package files
+*.egg-info/
+*.egg
+
+# macOS files
+.DS_Store
+
 # Virtual environments
 venv/
 .venv/
