@@ -1,22 +1,22 @@
-# RecrutaIA Rank - Datathon MLOps RH IA
+# RecrutaIA Rank - Sistema de Rankeamento de Candidatos
 
-## Visão Geral
+## Sobre o Projeto
 
-Este projeto é um pipeline MLOps completo para classificação de candidatos para vagas de emprego usando aprendizado de máquina e práticas modernas de MLOps. Foi desenvolvido para o desafio Datathon MLOps RH IA e demonstra uma abordagem pronta para produção para implementar, monitorar e avaliar modelos de classificação.
+Este projeto é um pipeline MLOps completo para classificação de candidatos para vagas de emprego usando aprendizado de máquina e práticas modernas de MLOps. Desenvolvido como projeto de conclusão do curso de **Machine Learning Engineering da FIAP**, demonstra uma abordagem prática e profissional para implementar, monitorar e avaliar modelos de classificação em produção.
 
 ## Principais Características
 
-- **FastAPI**: API REST para servir predições de classificação de candidatos
-- **Pipeline de Machine Learning**: Pré-processamento de dados, engenharia de features, treinamento de modelo e predição usando LightGBM e scikit-learn
-- **Monitoramento**: Prometheus e Grafana integrados para monitoramento em tempo real da API e modelo
-- **Dockerizado**: Todos os serviços (API, Prometheus, Grafana) executam em containers para fácil implantação
-- **Notebooks**: Para exploração de dados, verificação de embeddings e testes com dados mock
-- **Avaliação**: Scripts e ferramentas para avaliação robusta do modelo (NDCG, MAP, análise de grupos)
-- **Reprodutibilidade**: Todas as dependências são fixas e rastreadas para ambientes consistentes
+- **API de Machine Learning**: API REST usando FastAPI para servir predições de classificação de candidatos em tempo real
+- **Pipeline MLOps Completo**: Pré-processamento de dados, engenharia de features, treinamento automatizado e avaliação usando LightGBM
+- **Monitoramento Profissional**: Stack completa com Prometheus e Grafana para observabilidade, métricas de negócio e detecção de data drift
+- **Containerização**: Arquitetura cloud-native com Docker e Docker Compose para deploy consistente
+- **Embeddings Semânticos**: Utiliza sentence-transformers para análise inteligente de perfis e descrições de vagas
+- **Avaliação Robusta**: Métricas específicas para ranking (NDCG, MAP) com análise detalhada de performance
+- **Reprodutibilidade**: Ambiente completamente versionado e dependências controladas
 
-## 🚀 Início Rápido: Docker (Recomendado)
+## 🚀 Demo Rápida: Sistema Completo em 1 Comando
 
-**Quer apenas ver funcionando? Um comando te dá um sistema ML completo:**
+**Quer ver o sistema funcionando? Execute um comando e tenha uma solução MLOps completa rodando:**
 
 ```bash
 # Clone e inicie tudo
@@ -26,10 +26,10 @@ docker-compose up --build
 ```
 
 **🎯 O que você obtém instantaneamente:**
-- ✅ **API ML** com modelos treinados → `http://localhost:8000`
-- ✅ **Dashboard Grafana** (sem login) → `http://localhost:3000`  
-- ✅ **Métricas Prometheus** → `http://localhost:9090`
-- ✅ **Zero configuração** - tudo funciona direto da caixa
+- ✅ **API de ML em produção** com modelos treinados → `http://localhost:8000`
+- ✅ **Dashboard de monitoramento** profissional → `http://localhost:3000`  
+- ✅ **Coleta de métricas** em tempo real → `http://localhost:9090`
+- ✅ **Zero configuração** - ambiente pronto para demonstração
 
 **🧪 Teste a API:**
 ```bash
@@ -43,14 +43,14 @@ curl "http://localhost:8000/v1/list-vagas"
 curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
 ```
 
-**📊 Monitore no Grafana:**
-- Taxas de requisição, tempos de resposta, predições ML
-- Detecção de drift de dados e performance do modelo
-- Dashboards em tempo real com métricas de negócio
+**📊 Explore o Dashboard:**
+- Métricas de performance da API e latência
+- Análise de drift de dados e qualidade do modelo
+- Dashboards profissionais com insights de negócio
 
-## 🛠️ Desenvolvimento: Pipeline ML Completo
+## 🛠️ Desenvolvimento: Explorando o Pipeline Completo
 
-**Quer treinar seus próprios modelos ou trabalhar com dados reais? Aqui está o fluxo completo:**
+**Interessado em entender como tudo funciona? Aqui está o workflow completo de desenvolvimento:**
 
 ### 1. Configuração do Ambiente
 ```bash
@@ -199,6 +199,21 @@ curl "http://localhost:8000/v1/recommend_ranked?vaga_id=6647&top_n=10"
 - **Containerização**: Todos os serviços executam em containers Docker para implantação consistente
 - **Avaliação do Modelo**: Métricas específicas de classificação (NDCG, MAP)
 - **Monitoramento**: Capacidades de monitoramento de drift de dados em tempo real
+
+## Contexto Acadêmico
+
+Este projeto foi desenvolvido como **Projeto de Conclusão** do curso de **Machine Learning Engineering** da **FIAP** e implementa conceitos fundamentais de MLOps:
+
+### Conceitos Aplicados
+- **Versionamento de Modelos**: Controle completo de versões de dados, código e modelos
+- **CI/CD para ML**: Pipeline automatizado de integração e deploy
+- **Monitoramento em Produção**: Observabilidade completa com métricas customizadas
+- **Reproducibilidade**: Ambientes containerizados e dependências fixas  
+- **Data Drift Detection**: Monitoramento de qualidade e mudanças nos dados
+- **Model Serving**: API profissional para servir modelos em produção
+
+### Arquitetura Enterprise
+O sistema demonstra uma arquitetura robusta seguindo boas práticas da indústria, adequada para ambientes corporativos e soluções escaláveis.
 
 ## Dicas de Desenvolvimento
 
