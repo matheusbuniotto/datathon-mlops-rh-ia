@@ -45,7 +45,24 @@ def main():
     """
     print("🚀 RecrutaIA Rank - Quick Start Setup")
     print("=" * 50)
-    print("This script will set up a working demo with sample data.")
+    print("This script will set up a working demo.")
+    print()
+    print("📊 Data Options:")
+    print("   1. Sample data (100 records) - Fast demo, limited ML performance")
+    print("   2. Real data (download from GitHub) - Full dataset, best performance")
+    print()
+    
+    while True:
+        choice = input("Choose data option (1 for sample, 2 for real, or Enter for sample): ").strip()
+        if choice in ['', '1']:
+            use_sample_data = True
+            break
+        elif choice == '2':
+            use_sample_data = False
+            break
+        else:
+            print("Please enter 1, 2, or press Enter")
+    
     print()
     
     # Check if uv is available
@@ -64,15 +81,26 @@ def main():
     if not run_command("uv pip install -e .", "Installing package in development mode"):
         return 1
     
-    # Step 3: Run pipeline with sample data
-    print("\n📊 Running ML pipeline with sample data...")
-    if not run_command("uv run scripts/run_pipeline_with_samples.py", "Running sample data pipeline"):
+    # Step 3: Run pipeline 
+    if use_sample_data:
+        print("\n📊 Running ML pipeline with sample data...")
+        pipeline_cmd = "uv run scripts/run_pipeline_with_samples.py"
+        pipeline_desc = "Running sample data pipeline"
+    else:
+        print("\n📊 Running ML pipeline with real data...")
+        pipeline_cmd = "uv run app/pipeline_run_all.py"
+        pipeline_desc = "Running full data pipeline (this may take longer)"
+    
+    if not run_command(pipeline_cmd, pipeline_desc):
         print("💡 Pipeline failed - you may need to create directories manually")
         print("   Try: mkdir -p data/processed data/embeddings data/model_input data/final")
+        if not use_sample_data:
+            print("   Or check if data download was configured correctly")
         return 1
     
-    # Step 4: Train model with sample data
-    if not run_command("uv run app/model/train_ranker.py", "Training model with sample data"):
+    # Step 4: Train model
+    model_desc = "Training model with sample data" if use_sample_data else "Training model with real data"
+    if not run_command("uv run app/model/train_ranker.py", model_desc):
         print("💡 Model training failed - check if pipeline completed successfully")
         return 1
     
@@ -97,8 +125,12 @@ def main():
     print("      - Grafana: http://localhost:3000 (no login required)")
     print("      - Prometheus: http://localhost:9090")
     print()
-    print("📝 Note: This setup uses sample data (100 records) for demo purposes.")
-    print("   For production, replace sample files with full dataset and re-run pipeline.")
+    if use_sample_data:
+        print("📝 Note: This setup uses sample data (100 records) for demo purposes.")
+        print("   For production, run again and choose option 2 for real data.")
+    else:
+        print("📝 Note: This setup uses the full production dataset.")
+        print("   You now have a complete ML system with real data!")
     
     return 0
 

@@ -14,103 +14,102 @@ Este projeto é um pipeline MLOps completo para classificação de candidatos pa
 - **Avaliação**: Scripts e ferramentas para avaliação robusta do modelo (NDCG, MAP, análise de grupos)
 - **Reprodutibilidade**: Todas as dependências são fixas e rastreadas para ambientes consistentes
 
-## Início Rápido (Novos Usuários)
+## 🚀 Início Rápido: Docker (Recomendado)
 
-**Acabou de baixar o repositório? Tenha uma demo funcionando em 5 minutos:**
-
-```bash
-# Configuração com um comando usando dados de amostra
-uv run scripts/quick_start.py
-
-# Siga as instruções exibidas para iniciar API e monitoramento
-```
-
-Isso configura tudo necessário para uma demo funcionando com dados de amostra (100 registros).
-
-## Como Executar
-
-### Docker (Recomendado para Pull & Run)
-
-**Perfeito para: "Acabei de baixar o repositório e quero tudo funcionando"**
+**Quer apenas ver funcionando? Um comando te dá um sistema ML completo:**
 
 ```bash
-# Um comando - inicia API + Stack de Monitoramento
+# Clone e inicie tudo
+git clone https://github.com/matheusbuniotto/datathon-mlops-rh-ia.git
+cd datathon-mlops-rh-ia
 docker-compose up --build
-
-# Só isso! Tudo estará disponível em:
-# - API: http://localhost:8000
-# - Grafana: http://localhost:3000 (sem necessidade de login)
-# - Prometheus: http://localhost:9090
 ```
 
-**O que isso te dá:**
-- ✅ **API pronta para uso** com modelos treinados
-- ✅ **Dados de amostra** pré-carregados para demos
-- ✅ **Stack completa de monitoramento** (Grafana + Prometheus)
-- ✅ **Zero configuração local** necessária
+**🎯 O que você obtém instantaneamente:**
+- ✅ **API ML** com modelos treinados → `http://localhost:8000`
+- ✅ **Dashboard Grafana** (sem login) → `http://localhost:3000`  
+- ✅ **Métricas Prometheus** → `http://localhost:9090`
+- ✅ **Zero configuração** - tudo funciona direto da caixa
 
-**Teste a API:**
+**🧪 Teste a API:**
 ```bash
+# Verificação de saúde
 curl http://localhost:8000/health
+
+# Obter posições de trabalho disponíveis
 curl "http://localhost:8000/v1/list-vagas"
+
+# Obter candidatos ranqueados
 curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
 ```
 
-### Configuração de Desenvolvimento
+**📊 Monitore no Grafana:**
+- Taxas de requisição, tempos de resposta, predições ML
+- Detecção de drift de dados e performance do modelo
+- Dashboards em tempo real com métricas de negócio
 
-1. **Configuração do Ambiente**
-   ```bash
-   # Instale dependências (recomendado: use uv)
-   pip install -r requirements-dev.txt
-   
-   # Instale o pacote em modo de desenvolvimento
-   pip install -e .
-   ```
+## 🛠️ Desenvolvimento: Pipeline ML Completo
 
-2. **Execute a API Localmente**
-   ```bash
-   uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
+**Quer treinar seus próprios modelos ou trabalhar com dados reais? Aqui está o fluxo completo:**
 
-3. **Executar Testes**
-   ```bash
-   # Execute todos os testes
-   pytest
-   
-   # Execute arquivos de teste específicos
-   pytest tests/test_data_loader.py
-   pytest tests/test_ranking_preparation.py
-   ```
+### 1. Configuração do Ambiente
+```bash
+# Instale dependências (recomendado: use uv)
+uv sync
 
-4. **Treinamento e Avaliação do Modelo**
-   ```bash
-   # Treine o modelo de classificação com otimização de hiperparâmetros
-   uv run app/model/train_ranker_tuning.py dev
-   
-   # Treine o modelo com parâmetros fixos
-   python app/model/train_ranker.py
-   
-   # Avalie o modelo treinado
-   python app/model/evaluate_ranker.py
-   ```
+# Instale o pacote em modo desenvolvimento
+uv pip install -e .
+```
 
-5. **Pipeline de Dados**
-   ```bash
-   # Execute o pipeline completo de dados (JSON → Parquet → Embeddings → Dataset de Classificação)
-   python app/pipeline_run_all.py
-   
-   # Execute estágio individual do pipeline
-   python app/pipeline.py
-   ```
+### 2. Configuração Interativa com Opções de Dados
+```bash
+# Configuração interativa - escolha dados de amostra ou reais
+uv run scripts/quick_start.py
 
-6. **Qualidade de Código**
-   ```bash
-   # Execute linting (Ruff está configurado no pyproject.toml)
-   ruff check .
-   
-   # Formate o código
-   ruff format .
-   ```
+# Siga as instruções para selecionar:
+# 1. Dados de amostra (100 registros) - Demo rápida
+# 2. Dados reais (download automático) - Performance completa
+```
+
+### 3. Pipeline e Treinamento Manual
+```bash
+# Baixar dados de produção reais (se necessário)
+uv run scripts/download_data.py
+
+# Executar pipeline completo de dados
+uv run app/pipeline_run_all.py
+
+# Treinar modelo com ajuste de hiperparâmetros
+uv run app/model/train_ranker_tuning.py dev
+
+# Avaliar performance do modelo
+uv run app/model/evaluate_ranker.py
+
+# Executar API local
+uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 4. Ferramentas de Desenvolvimento
+```bash
+# Executar testes
+pytest
+
+# Qualidade do código
+uv run ruff check .
+uv run ruff format .
+```
+
+### 📊 Informações sobre Dados
+
+**Dados de Amostra (incluídos no repositório):**
+- `sample_applicants.json` (50 candidatos, 212KB)
+- `sample_vagas.json` (20 posições, 44KB)  
+- `sample_prospects.json` (30 prospects, 36KB)
+
+**Dados de Produção (baixados automaticamente do GitHub Releases):**
+- `applicants.json` (194MB) - Base completa de candidatos
+- `vagas.json` (37MB) - Posições de trabalho completas
+- `prospects.json` (21MB) - Todos os dados de prospects
 
 ## Principais Endpoints
 

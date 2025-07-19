@@ -29,125 +29,102 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 ├── requirements-dev.txt    
 ```
 
-## Quick Start (New Users)
+## 🚀 Quick Start: Docker (Recommended)
 
-**Just pulled the repo? Get a working demo in 5 minutes:**
-
-```bash
-# One command setup with sample data
-uv run scripts/quick_start.py
-
-# Follow the printed instructions to start API and monitoring
-```
-
-This sets up everything needed for a working demo with sample data (100 records).
-
-## How to Run
-
-### Docker (Recommended for Pull & Run)
-
-**Perfect for: "Just pulled the repo and want everything working"**
+**Just want to see it working? One command gets you a complete ML system:**
 
 ```bash
-# One command - starts API + Monitoring stack
+# Clone and start everything
+git clone https://github.com/matheusbuniotto/datathon-mlops-rh-ia.git
+cd datathon-mlops-rh-ia
 docker-compose up --build
-
-# That's it! Everything will be available at:
-# - API: http://localhost:8000
-# - Grafana: http://localhost:3000 (no login required)
-# - Prometheus: http://localhost:9090
 ```
 
-**What this gives you:**
-- ✅ **Ready-to-use API** with trained models
-- ✅ **Sample data** pre-loaded for demos
-- ✅ **Complete monitoring stack** (Grafana + Prometheus)
-- ✅ **Zero local setup** required
+**🎯 What you get instantly:**
+- ✅ **ML API** with trained models → `http://localhost:8000`
+- ✅ **Grafana Dashboard** (no login) → `http://localhost:3000`  
+- ✅ **Prometheus Metrics** → `http://localhost:9090`
+- ✅ **Zero configuration** - everything works out of the box
 
-**Test the API:**
+**🧪 Test the API:**
 ```bash
+# Health check
 curl http://localhost:8000/health
+
+# Get available job positions 
 curl "http://localhost:8000/v1/list-vagas"
+
+# Get ranked candidate recommendations
 curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
 ```
 
-### Development Setup
+**📊 Monitor in Grafana:**
+- Request rates, response times, ML predictions
+- Data drift detection and model performance
+- Real-time dashboards with business metrics
 
-1. **Environment Setup**
-   ```bash
-   # Install dependencies (recommended: use uv)
-   pip install -r requirements-dev.txt
-   
-   # Install package in development mode
-   pip install -e .
-   ```
+## 🛠️ Development: Full ML Pipeline
 
-2. **Run API Locally**
-   ```bash
-   uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
+**Want to train your own models or work with real data? Here's the complete workflow:**
 
-3. **Running Tests**
-   ```bash
-   # Run all tests
-   pytest
-   
-   # Run specific test files
-   pytest tests/test_data_loader.py
-   pytest tests/test_ranking_preparation.py
-   ```
-
-4. **Model Training & Evaluation**
-   ```bash
-   # Train ranking model with hyperparameter tuning
-   uv run app/model/train_ranker_tuning.py dev
-   
-   # Train model with fixed parameters
-   python app/model/train_ranker.py
-   
-   # Evaluate trained model
-   python app/model/evaluate_ranker.py
-   ```
-
-5. **Data Pipeline**
-   ```bash
-   # Run complete data pipeline (JSON → Parquet → Embeddings → Ranking Dataset)
-   python app/pipeline_run_all.py
-   
-   # Run individual pipeline stage
-   python app/pipeline.py
-   ```
-
-6. **Code Quality**
-   ```bash
-   # Run linting (Ruff is configured in pyproject.toml)
-   ruff check .
-   
-   # Format code
-   ruff format .
-   ```
-
-### Quick Start with Sample Data
-
-For quick testing and demo purposes, use the provided sample data (292KB total):
-
+### 1. Environment Setup
 ```bash
-# Run pipeline with sample data (recommended for first try)
-uv run scripts/run_pipeline_with_samples.py
+# Install dependencies (recommended: use uv)
+uv sync
 
-# Train model with sample data
-uv run app/model/train_ranker.py
+# Install package in development mode  
+uv pip install -e .
+```
 
-# Start API with sample-generated models
+### 2. Interactive Setup with Data Options
+```bash
+# Interactive setup - choose sample or real data
+uv run scripts/quick_start.py
+
+# Follow prompts to select:
+# 1. Sample data (100 records) - Fast demo 
+# 2. Real data (auto-download) - Full performance
+```
+
+### 3. Manual Pipeline & Training
+```bash
+# Download real production data (if needed)
+uv run scripts/download_data.py
+
+# Run complete data pipeline  
+uv run app/pipeline_run_all.py
+
+# Train model with hyperparameter tuning
+uv run app/model/train_ranker_tuning.py dev
+
+# Evaluate model performance
+uv run app/model/evaluate_ranker.py
+
+# Run local API
 uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-**Sample Data Files:**
-- `data/raw/sample_applicants.json` (50 candidates, 212KB)
-- `data/raw/sample_vagas.json` (20 job positions, 44KB)  
-- `data/raw/sample_prospects.json` (30 prospects, 36KB)
+### 4. Development Tools
+```bash
+# Run tests
+pytest
 
-**Note:** Sample data provides a working demo but with limited ML performance. For production, use the full dataset.
+# Code quality
+uv run ruff check .
+uv run ruff format .
+```
+
+### 📊 Data Information
+
+**Sample Data (included in repo):**
+- `sample_applicants.json` (50 candidates, 212KB)
+- `sample_vagas.json` (20 job positions, 44KB)  
+- `sample_prospects.json` (30 prospects, 36KB)
+
+**Production Data (auto-downloaded from GitHub Releases):**
+- `applicants.json` (194MB) - Full candidate database
+- `vagas.json` (37MB) - Complete job positions  
+- `prospects.json` (21MB) - All prospect data
 
 ## Key Endpoints
 
