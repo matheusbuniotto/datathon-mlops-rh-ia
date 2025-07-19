@@ -2,7 +2,7 @@ import pandas as pd
 import json
 from loguru import logger
 import os
-from prometheus_client import Gauge, CollectorRegistry, REGISTRY
+from prometheus_client import Gauge, REGISTRY
 from scipy.stats import ks_2samp
 import time
 

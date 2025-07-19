@@ -1,0 +1,20 @@
+{
+  "validation": {
+    "dataset": "validation",
+    "ndcg": 0.909926599615155,
+    "map": 0.8912298368718882,
+    "total_groups": 1053,
+    "valid_groups": 593,
+    "k": 5,
+    "relevance_threshold": 0.2
+  },
+  "test": {
+    "dataset": "test",
+    "ndcg": 0.7974233616937159,
+    "map": 0.7868701970758266,
+    "total_groups": 1053,
+    "valid_groups": 596,
+    "k": 5,
+    "relevance_threshold": 0.2
+  }
+}

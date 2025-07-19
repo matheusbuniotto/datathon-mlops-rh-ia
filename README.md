@@ -29,22 +29,47 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 ├── requirements-dev.txt    
 ```
 
+## Quick Start (New Users)
+
+**Just pulled the repo? Get a working demo in 5 minutes:**
+
+```bash
+# One command setup with sample data
+uv run scripts/quick_start.py
+
+# Follow the printed instructions to start API and monitoring
+```
+
+This sets up everything needed for a working demo with sample data (100 records).
+
 ## How to Run
 
-### Production (Docker)
-1. **Build and Start All Services**  
-   ```bash
-   docker-compose up --build
-   ```
+### Docker (Recommended for Pull & Run)
 
-2. **API Access**  
-   - Accessible at: `http://localhost:8000`
-   - Health check: `GET /health`
-   - Prediction: `/v1/recommend_ranked` + parameter for vaga_id (meaning job position id)
+**Perfect for: "Just pulled the repo and want everything working"**
 
-3. **Monitoring**  
-   - Prometheus: `http://localhost:9090` (metrics collection)
-   - Grafana: `http://localhost:3000` (admin/admin) (dashboards and visualization)
+```bash
+# One command - starts API + Monitoring stack
+docker-compose up --build
+
+# That's it! Everything will be available at:
+# - API: http://localhost:8000
+# - Grafana: http://localhost:3000 (no login required)
+# - Prometheus: http://localhost:9090
+```
+
+**What this gives you:**
+- ✅ **Ready-to-use API** with trained models
+- ✅ **Sample data** pre-loaded for demos
+- ✅ **Complete monitoring stack** (Grafana + Prometheus)
+- ✅ **Zero local setup** required
+
+**Test the API:**
+```bash
+curl http://localhost:8000/health
+curl "http://localhost:8000/v1/list-vagas"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
+```
 
 ### Development Setup
 
@@ -101,6 +126,28 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
    # Format code
    ruff format .
    ```
+
+### Quick Start with Sample Data
+
+For quick testing and demo purposes, use the provided sample data (292KB total):
+
+```bash
+# Run pipeline with sample data (recommended for first try)
+uv run scripts/run_pipeline_with_samples.py
+
+# Train model with sample data
+uv run app/model/train_ranker.py
+
+# Start API with sample-generated models
+uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Sample Data Files:**
+- `data/raw/sample_applicants.json` (50 candidates, 212KB)
+- `data/raw/sample_vagas.json` (20 job positions, 44KB)  
+- `data/raw/sample_prospects.json` (30 prospects, 36KB)
+
+**Note:** Sample data provides a working demo but with limited ML performance. For production, use the full dataset.
 
 ## Key Endpoints
 

@@ -14,19 +14,46 @@ Este projeto é um pipeline MLOps completo para classificação de candidatos pa
 - **Avaliação**: Scripts e ferramentas para avaliação robusta do modelo (NDCG, MAP, análise de grupos)
 - **Reprodutibilidade**: Todas as dependências são fixas e rastreadas para ambientes consistentes
 
-## Como Executar
+## Início Rápido (Novos Usuários)
 
-### Produção (Docker)
+**Acabou de baixar o repositório? Tenha uma demo funcionando em 5 minutos:**
 
 ```bash
-# Construa e inicie todos os serviços (API + monitoramento)
+# Configuração com um comando usando dados de amostra
+uv run scripts/quick_start.py
+
+# Siga as instruções exibidas para iniciar API e monitoramento
+```
+
+Isso configura tudo necessário para uma demo funcionando com dados de amostra (100 registros).
+
+## Como Executar
+
+### Docker (Recomendado para Pull & Run)
+
+**Perfeito para: "Acabei de baixar o repositório e quero tudo funcionando"**
+
+```bash
+# Um comando - inicia API + Stack de Monitoramento
 docker-compose up --build
 
-# Execute apenas o serviço da API
-docker-compose build api
+# Só isso! Tudo estará disponível em:
+# - API: http://localhost:8000
+# - Grafana: http://localhost:3000 (sem necessidade de login)
+# - Prometheus: http://localhost:9090
+```
 
-# Execute em modo desanexado
-docker-compose up -d
+**O que isso te dá:**
+- ✅ **API pronta para uso** com modelos treinados
+- ✅ **Dados de amostra** pré-carregados para demos
+- ✅ **Stack completa de monitoramento** (Grafana + Prometheus)
+- ✅ **Zero configuração local** necessária
+
+**Teste a API:**
+```bash
+curl http://localhost:8000/health
+curl "http://localhost:8000/v1/list-vagas"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
 ```
 
 ### Configuração de Desenvolvimento
