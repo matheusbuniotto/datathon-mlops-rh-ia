@@ -24,3 +24,4 @@ data/**/*.json
 # Ignore all Parquet files in the data directory
 data/**/*.parquet
 .aider*
+CLAUDE.md
