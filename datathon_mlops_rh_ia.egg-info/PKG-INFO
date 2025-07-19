@@ -1,0 +1,311 @@
+Metadata-Version: 2.4
+Name: datathon-mlops-rh-ia
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: asttokens==3.0.0
+Requires-Dist: certifi==2025.4.26
+Requires-Dist: charset-normalizer==3.4.2
+Requires-Dist: comm==0.2.2
+Requires-Dist: debugpy==1.8.14
+Requires-Dist: decorator==5.2.1
+Requires-Dist: duckdb==1.3.0
+Requires-Dist: executing==2.2.0
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: filelock==3.18.0
+Requires-Dist: fsspec==2025.5.1
+Requires-Dist: fuzzywuzzy>=0.18.0
+Requires-Dist: git-filter-repo==2.47.0
+Requires-Dist: hf-xet==1.1.3
+Requires-Dist: huggingface-hub==0.32.4
+Requires-Dist: idna==3.10
+Requires-Dist: iniconfig==2.1.0
+Requires-Dist: ipykernel==6.29.5
+Requires-Dist: ipython==9.3.0
+Requires-Dist: ipython-pygments-lexers==1.1.1
+Requires-Dist: jedi==0.19.2
+Requires-Dist: jinja2==3.1.6
+Requires-Dist: joblib==1.5.1
+Requires-Dist: jupyter-client==8.6.3
+Requires-Dist: jupyter-core==5.8.1
+Requires-Dist: lightgbm>=4.6.0
+Requires-Dist: loguru==0.7.3
+Requires-Dist: markupsafe==3.0.2
+Requires-Dist: matplotlib>=3.10.3
+Requires-Dist: matplotlib-inline==0.1.7
+Requires-Dist: mpmath==1.3.0
+Requires-Dist: nest-asyncio==1.6.0
+Requires-Dist: networkx==3.5
+Requires-Dist: numpy==2.3.0
+Requires-Dist: optuna>=4.3.0
+Requires-Dist: packaging==25.0
+Requires-Dist: pandas==2.3.0
+Requires-Dist: parso==0.8.4
+Requires-Dist: pexpect==4.9.0
+Requires-Dist: pillow==11.2.1
+Requires-Dist: platformdirs==4.3.8
+Requires-Dist: pluggy==1.6.0
+Requires-Dist: prompt-toolkit==3.0.51
+Requires-Dist: psutil==7.0.0
+Requires-Dist: ptyprocess==0.7.0
+Requires-Dist: pure-eval==0.2.3
+Requires-Dist: pyarrow==20.0.0
+Requires-Dist: pygments==2.19.1
+Requires-Dist: pytest==8.4.0
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: python-levenshtein>=0.27.1
+Requires-Dist: pytz==2025.2
+Requires-Dist: pyyaml==6.0.2
+Requires-Dist: pyzmq==26.4.0
+Requires-Dist: regex==2024.11.6
+Requires-Dist: requests==2.32.3
+Requires-Dist: safetensors==0.5.3
+Requires-Dist: scikit-learn==1.7.0
+Requires-Dist: scipy==1.15.3
+Requires-Dist: seaborn>=0.13.2
+Requires-Dist: sentence-transformers==4.1.0
+Requires-Dist: setuptools==80.9.0
+Requires-Dist: six==1.17.0
+Requires-Dist: stack-data==0.6.3
+Requires-Dist: sympy==1.14.0
+Requires-Dist: threadpoolctl==3.6.0
+Requires-Dist: tokenizers==0.21.1
+Requires-Dist: torch==2.7.1
+Requires-Dist: tornado==6.5.1
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: traitlets==5.14.3
+Requires-Dist: transformers==4.52.4
+Requires-Dist: typing-extensions==4.14.0
+Requires-Dist: tzdata==2025.2
+Requires-Dist: urllib3==2.4.0
+Requires-Dist: uvicorn>=0.34.3
+Requires-Dist: wcwidth==0.2.13
+
+# RecrutaIA Rank - Datathon MLOps RH IA
+
+## Overview
+
+This project is an end-to-end MLOps pipeline for ranking candidates for job positions using machine learning and modern MLOps practices. It is designed for the Datathon MLOps RH IA challenge and demonstrates a production-ready approach for deploying, monitoring, and evaluating ranking models.
+
+## Main Features
+
+- **FastAPI**: REST API for serving candidate ranking predictions.
+- **Machine Learning Pipeline**: Data preprocessing, feature engineering, model training, and prediction using LightGBM and scikit-learn.
+- **Monitoring**: Integrated Prometheus and Grafana for real-time API and model monitoring (request count, latency, custom metrics).
+- **Dockerized**: All services (API, Prometheus, Grafana) run in containers for easy deployment.
+- **Notebooks**: For data exploration, embedding checks, and mock data testing.
+- **Evaluation**: Scripts and tools for robust model evaluation (NDCG, MAP, group analysis).
+- **Reproducibility**: All dependencies are pinned and tracked for consistent environments.
+
+## Project Structure
+
+```
+.
+├── app/                # Core application logic (pipeline, stages, prediction, evaluation)
+├── data/               # Data files (processed, embeddings, model input, etc.)
+├── models/             # Trained models and pipelines
+├── notebooks/          # Jupyter notebooks uised for exploring and testing
+├── services/
+│   ├── api/            # FastAPI service and routes
+│   └── monitoring/     # Prometheus / Grafana for monitorin g
+├── docker-compose.yml  # Services w/ docker
+├── requirements-dev.txt    
+```
+
+## How to Run
+
+### Production (Docker)
+1. **Build and Start All Services**  
+   ```bash
+   docker-compose up --build
+   ```
+
+2. **API Access**  
+   - Accessible at: `http://localhost:8000`
+   - Health check: `GET /health`
+   - Prediction: `/v1/recommend_ranked` + parameter for vaga_id (meaning job position id)
+
+3. **Monitoring**  
+   - Prometheus: `http://localhost:9090` (metrics collection)
+   - Grafana: `http://localhost:3000` (admin/admin) (dashboards and visualization)
+
+### Development Setup
+
+1. **Environment Setup**
+   ```bash
+   # Install dependencies (recommended: use uv)
+   pip install -r requirements-dev.txt
+   
+   # Install package in development mode
+   pip install -e .
+   ```
+
+2. **Run API Locally**
+   ```bash
+   uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
+
+3. **Running Tests**
+   ```bash
+   # Run all tests
+   pytest
+   
+   # Run specific test files
+   pytest tests/test_data_loader.py
+   pytest tests/test_ranking_preparation.py
+   ```
+
+4. **Model Training & Evaluation**
+   ```bash
+   # Train ranking model with hyperparameter tuning
+   uv run app/model/train_ranker_tuning.py dev
+   
+   # Train model with fixed parameters
+   python app/model/train_ranker.py
+   
+   # Evaluate trained model
+   python app/model/evaluate_ranker.py
+   ```
+
+5. **Data Pipeline**
+   ```bash
+   # Run complete data pipeline (JSON → Parquet → Embeddings → Ranking Dataset)
+   python app/pipeline_run_all.py
+   
+   # Run individual pipeline stage
+   python app/pipeline.py
+   ```
+
+6. **Code Quality**
+   ```bash
+   # Run linting (Ruff is configured in pyproject.toml)
+   ruff check .
+   
+   # Format code
+   ruff format .
+   ```
+
+## Key Endpoints
+
+- `GET /health`: Service health check
+- `GET /v1/recommend_ranked?vaga_id={id}&top_n={n}`: Get ranked candidate recommendations for a specific job
+- `GET /v1/list-vagas`: Returns all available vaga IDs that can be used with the recommend endpoint
+- `GET /metrics`: Prometheus metrics endpoint
+
+## Architecture Overview
+
+The system follows a staged ML pipeline architecture:
+
+### Core Components
+
+1. **Data Pipeline (`app/pipeline.py`)**: Orchestrates the complete data processing flow
+   - Raw JSON data → Parquet conversion
+   - SQL-based data merging via DuckDB
+   - Embedding generation using sentence-transformers
+   - Ranking dataset preparation
+
+2. **ML Pipeline Stages (`app/stages/`)**:
+   - `embeddings_stage.py`: Generates semantic embeddings for job descriptions and candidate profiles
+   - `ranking_preparation_stage.py`: Creates training data for ranking model with relevance targets
+   - `feature_engineering_stage.py`: Feature engineering and preprocessing
+   - `data_split_stage.py`: Data splitting for training/validation/test
+
+3. **Model Training (`app/model/`)**:
+   - `train_ranker.py`: LightGBM ranking model training
+   - `train_ranker_tuning.py`: Hyperparameter optimization with Optuna
+   - `evaluate_ranker.py`: Model evaluation with ranking metrics (NDCG, MAP)
+
+4. **API Service (`services/api/`)**:
+   - FastAPI-based REST API
+   - Real-time candidate ranking predictions
+   - Prometheus metrics integration
+   - Health monitoring
+
+5. **Monitoring Stack (`services/monitoring/`)**:
+   - Prometheus for metrics collection
+   - Grafana for visualization and dashboards
+   - Custom business metrics and data drift monitoring
+
+### Data Flow
+
+```
+Raw Data (JSON) → Data Pipeline → Embeddings → Feature Engineering → Model Training → API Deployment
+                                     ↓
+                              Monitoring & Evaluation
+```
+
+### Key Data Artifacts
+
+- `data/processed/merged.parquet`: Unified recruitment data
+- `data/embeddings/combined_embeddings.parquet`: Semantic embeddings for all entities
+- `data/model_input/`: Preprocessed features ready for model training
+- `models/lgbm_ranker.pkl`: Trained LightGBM ranking model
+
+## Monitoring Metrics
+
+- API request count and latency (by endpoint/method)
+- Custom business metrics and data drift monitoring
+- Real-time model performance tracking
+
+## Notebooks
+!! CAUTION !! These are used for exploration porpose only.
+- `notebooks/embeding_check.ipynb`: Embedding and feature pipeline checks
+- `notebooks/mock_data_test.ipynb`: Mock data and prediction pipeline tests
+
+## Requirements
+
+- Docker & Docker Compose
+- Python 3.11+ (for local development)
+- See `requirements-dev.txt` for dependencies
+
+## Technical Details
+
+- **ML Framework**: LightGBM for ranking with group-based learning-to-rank
+- **Embeddings**: Generated using sentence-transformers (multilingual models)
+- **Data Processing**: DuckDB for efficient SQL operations and data processing
+- **API Framework**: FastAPI with Prometheus metrics integration
+- **Containerization**: All services run in Docker containers for consistent deployment
+- **Model Evaluation**: Ranking-specific metrics (NDCG, MAP)
+- **Monitoring**: Real-time data drift monitoring capabilities
+
+## Development Tips
+
+- Use `uv` for faster dependency management when available
+- The notebooks in `notebooks/` are for exploration and may need cleanup  
+- Model artifacts are saved in both `app/model/` and `models/` directories
+- All major pipeline stages have corresponding test files
+- Ruff is configured to exclude Jupyter notebooks from linting
+
+## Architecture
+
+```mermaid
+flowchart TD
+    User -->|HTTP Request| API[FastAPI Service]
+    API -->|/metrics| Prometheus
+    Prometheus --> Grafana
+    API -->|Model Prediction| Model[ML Model]
+```
+
+## How to Use Docker
+
+```bash
+# Build all services 
+docker-compose build
+
+# Start all services
+docker-compose up
+
+```
+
+## Example API Calls
+
+```bash
+# Get list of all available vaga IDs
+curl "http://localhost:8000/v1/list-vagas"
+
+# Get ranked candidate recommendations for specific vagas
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=6647&top_n=10"
+```
+

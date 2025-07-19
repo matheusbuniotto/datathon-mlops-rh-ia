@@ -35,8 +35,8 @@ def check_and_download_data():
         download_script = current_dir / "scripts" / "download_data.py"
         
         try:
-            result = subprocess.run([sys.executable, str(download_script)], 
-                                  capture_output=True, text=True, check=True)
+            subprocess.run([sys.executable, str(download_script)], 
+                          capture_output=True, text=True, check=True)
             print("[INFO] Data download completed successfully")
             return True
         except subprocess.CalledProcessError as e:

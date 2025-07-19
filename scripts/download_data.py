@@ -6,9 +6,7 @@ Downloads the real production data from GitHub Releases if not present locally.
 Automatically called by the pipeline when data files are missing.
 """
 
-import os
 import urllib.request
-import sys
 from pathlib import Path
 
 # Configuration
