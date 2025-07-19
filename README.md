@@ -31,34 +31,138 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 
 ## How to Run
 
+### Production (Docker)
 1. **Build and Start All Services**  
    ```bash
    docker-compose up --build
    ```
 
-2. **API**  
+2. **API Access**  
    - Accessible at: `http://localhost:8000`
    - Health check: `GET /health`
    - Prediction: `/v1/recommend_ranked` + parameter for vaga_id (meaning job position id)
 
 3. **Monitoring**  
-   - Prometheus: `http://localhost:9090` (without login)
-   - Grafana: `http://localhost:3000` (default user: admin / admin)
+   - Prometheus: `http://localhost:9090` (metrics collection)
+   - Grafana: `http://localhost:3000` (admin/admin) (dashboards and visualization)
 
-4. **Model Training & Evaluation**  
-   - Run pipelines and evaluation scripts in the `app/` folder or via notebooks.
-   * Note: notebooks are messy and need some adjusment for better readability.
+### Development Setup
+
+1. **Environment Setup**
+   ```bash
+   # Install dependencies (recommended: use uv)
+   pip install -r requirements-dev.txt
+   
+   # Install package in development mode
+   pip install -e .
+   ```
+
+2. **Run API Locally**
+   ```bash
+   uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
+
+3. **Running Tests**
+   ```bash
+   # Run all tests
+   pytest
+   
+   # Run specific test files
+   pytest tests/test_data_loader.py
+   pytest tests/test_ranking_preparation.py
+   ```
+
+4. **Model Training & Evaluation**
+   ```bash
+   # Train ranking model with hyperparameter tuning
+   uv run app/model/train_ranker_tuning.py dev
+   
+   # Train model with fixed parameters
+   python app/model/train_ranker.py
+   
+   # Evaluate trained model
+   python app/model/evaluate_ranker.py
+   ```
+
+5. **Data Pipeline**
+   ```bash
+   # Run complete data pipeline (JSON → Parquet → Embeddings → Ranking Dataset)
+   python app/pipeline_run_all.py
+   
+   # Run individual pipeline stage
+   python app/pipeline.py
+   ```
+
+6. **Code Quality**
+   ```bash
+   # Run linting (Ruff is configured in pyproject.toml)
+   ruff check .
+   
+   # Format code
+   ruff format .
+   ```
 
 ## Key Endpoints
 
-- `/health`: API health check
-- `/v1/recommend_ranked`: Ranked candidate recommendations for a given job role.
-- `/v1/list-vagas`: Returns all available vaga IDs that can be used with the recommend endpoint
+- `GET /health`: Service health check
+- `GET /v1/recommend_ranked?vaga_id={id}&top_n={n}`: Get ranked candidate recommendations for a specific job
+- `GET /v1/list-vagas`: Returns all available vaga IDs that can be used with the recommend endpoint
+- `GET /metrics`: Prometheus metrics endpoint
+
+## Architecture Overview
+
+The system follows a staged ML pipeline architecture:
+
+### Core Components
+
+1. **Data Pipeline (`app/pipeline.py`)**: Orchestrates the complete data processing flow
+   - Raw JSON data → Parquet conversion
+   - SQL-based data merging via DuckDB
+   - Embedding generation using sentence-transformers
+   - Ranking dataset preparation
+
+2. **ML Pipeline Stages (`app/stages/`)**:
+   - `embeddings_stage.py`: Generates semantic embeddings for job descriptions and candidate profiles
+   - `ranking_preparation_stage.py`: Creates training data for ranking model with relevance targets
+   - `feature_engineering_stage.py`: Feature engineering and preprocessing
+   - `data_split_stage.py`: Data splitting for training/validation/test
+
+3. **Model Training (`app/model/`)**:
+   - `train_ranker.py`: LightGBM ranking model training
+   - `train_ranker_tuning.py`: Hyperparameter optimization with Optuna
+   - `evaluate_ranker.py`: Model evaluation with ranking metrics (NDCG, MAP)
+
+4. **API Service (`services/api/`)**:
+   - FastAPI-based REST API
+   - Real-time candidate ranking predictions
+   - Prometheus metrics integration
+   - Health monitoring
+
+5. **Monitoring Stack (`services/monitoring/`)**:
+   - Prometheus for metrics collection
+   - Grafana for visualization and dashboards
+   - Custom business metrics and data drift monitoring
+
+### Data Flow
+
+```
+Raw Data (JSON) → Data Pipeline → Embeddings → Feature Engineering → Model Training → API Deployment
+                                     ↓
+                              Monitoring & Evaluation
+```
+
+### Key Data Artifacts
+
+- `data/processed/merged.parquet`: Unified recruitment data
+- `data/embeddings/combined_embeddings.parquet`: Semantic embeddings for all entities
+- `data/model_input/`: Preprocessed features ready for model training
+- `models/lgbm_ranker.pkl`: Trained LightGBM ranking model
 
 ## Monitoring Metrics
 
 - API request count and latency (by endpoint/method)
-- Custom business metrics (can be extended)
+- Custom business metrics and data drift monitoring
+- Real-time model performance tracking
 
 ## Notebooks
 !! CAUTION !! These are used for exploration porpose only.
@@ -71,12 +175,23 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 - Python 3.11+ (for local development)
 - See `requirements-dev.txt` for dependencies
 
+## Technical Details
 
-### 
+- **ML Framework**: LightGBM for ranking with group-based learning-to-rank
+- **Embeddings**: Generated using sentence-transformers (multilingual models)
+- **Data Processing**: DuckDB for efficient SQL operations and data processing
+- **API Framework**: FastAPI with Prometheus metrics integration
+- **Containerization**: All services run in Docker containers for consistent deployment
+- **Model Evaluation**: Ranking-specific metrics (NDCG, MAP)
+- **Monitoring**: Real-time data drift monitoring capabilities
 
-Running
+## Development Tips
 
-> uv run app/model/train_ranker_tuning.py dev
+- Use `uv` for faster dependency management when available
+- The notebooks in `notebooks/` are for exploration and may need cleanup  
+- Model artifacts are saved in both `app/model/` and `models/` directories
+- All major pipeline stages have corresponding test files
+- Ruff is configured to exclude Jupyter notebooks from linting
 
 ## Architecture
 
