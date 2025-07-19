@@ -25,8 +25,19 @@ docker-compose up
 docker-compose restart api
 ```
 
-## Exemplo de Chamada à API
+## Principais Endpoints
+
+- `/health`: Verificação de saúde da API
+- `/v1/recommend_ranked`: Recomendações de candidatos ranqueados para uma vaga específica
+- `/v1/list-vagas`: Retorna todos os IDs de vagas disponíveis para usar no endpoint de recomendação
+
+## Exemplos de Chamadas à API
 
 ```bash
-curl "http://localhost:8000/predict"
+# Obter lista de todos os IDs de vagas disponíveis
+curl "http://localhost:8000/v1/list-vagas"
+
+# Obter recomendações de candidatos ranqueados para vagas específicas
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
+curl "http://localhost:8000/v1/recommend_ranked?vaga_id=6647&top_n=10"
 ```

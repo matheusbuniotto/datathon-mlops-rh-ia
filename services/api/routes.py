@@ -10,6 +10,45 @@ router = APIRouter()
 # Get the project root directory
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 
+@router.get("/list-vagas")
+def list_vagas():
+    """
+    Returns a list of all available vaga_ids that can be used in the recommend_ranked endpoint.
+    """
+    logger.info("[API] Requisição recebida para listagem de vagas")
+    
+    try:
+        # Use absolute paths based on project root
+        data_path = os.path.join(PROJECT_ROOT, "data/final/test_candidates_raw.parquet")
+        
+        logger.info(f"Loading data from: {data_path}")
+        
+        # Load the data
+        df = pd.read_parquet(data_path)
+        
+        # Get unique vaga IDs
+        unique_vagas = sorted(df['codigo_vaga'].unique().tolist())
+        
+        logger.success(f"[API] Found {len(unique_vagas)} unique vagas")
+        
+        return {
+            "total_vagas": len(unique_vagas),
+            "vaga_ids": unique_vagas
+        }
+        
+    except FileNotFoundError as e:
+        logger.error(f"[API] Arquivo não encontrado: {str(e)}")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Arquivo de dados não encontrado: {str(e)}"
+        )
+    except Exception as e:
+        logger.error(f"[API] Erro ao listar vagas: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro ao listar vagas: {str(e)}"
+        )
+
 @router.get("/recommend_ranked")
 def recommend_ranked(vaga_id: int = Query(...), top_n: int = Query(5)):
     logger.info(f"[API] Requisição recebida: vaga_id={vaga_id}, top_n={top_n}")

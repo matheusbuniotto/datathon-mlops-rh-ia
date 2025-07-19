@@ -53,7 +53,7 @@ This project is an end-to-end MLOps pipeline for ranking candidates for job posi
 
 - `/health`: API health check
 - `/v1/recommend_ranked`: Ranked candidate recommendations for a given job role.
-- TO DO /v1/list_jobs: Will return a list of possible job ids to use
+- `/v1/list-vagas`: Returns all available vaga IDs that can be used with the recommend endpoint
 
 ## Monitoring Metrics
 
@@ -99,9 +99,13 @@ docker-compose up
 
 ```
 
-## Example API Call
+## Example API Calls
 
 ```bash
+# Get list of all available vaga IDs
+curl "http://localhost:8000/v1/list-vagas"
+
+# Get ranked candidate recommendations for specific vagas
 curl "http://localhost:8000/v1/recommend_ranked?vaga_id=1650&top_n=5"
 curl "http://localhost:8000/v1/recommend_ranked?vaga_id=6647&top_n=10"
 ```
