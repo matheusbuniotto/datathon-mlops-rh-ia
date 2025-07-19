@@ -25,6 +25,11 @@ def recommend_ranked(vaga_id: int = Query(...), top_n: int = Query(5)):
         # Carrega os dados
         df = pd.read_parquet(data_path)
         
+        # Log production data for monitoring
+        monitoring_data_path = os.path.join(PROJECT_ROOT, "data/monitoring")
+        os.makedirs(monitoring_data_path, exist_ok=True)
+        df.to_parquet(os.path.join(monitoring_data_path, "production_data.parquet"))
+        
         # Usa a função de predição
         resultado = predict_rank_for_vaga(
             df_candidates=df,

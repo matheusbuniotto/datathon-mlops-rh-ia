@@ -4,6 +4,8 @@ from loguru import logger
 from prometheus_fastapi_instrumentator import Instrumentator
 from prometheus_client import Counter, Histogram
 import time
+import threading
+from app.monitoring.monitor import monitoring_job
 
 app = FastAPI(title="RecrutaIA Rank API", version="1.0")
 
@@ -27,6 +29,12 @@ API_REQUEST_DURATION_SECONDS = Histogram(
 
 # Instrumentator exposes metrics at /metrics
 Instrumentator().instrument(app).expose(app, endpoint="/metrics", include_in_schema=False)
+
+@app.on_event("startup")
+async def startup_event():
+    logger.info("Starting monitoring job in background...")
+    monitoring_thread = threading.Thread(target=monitoring_job, daemon=True)
+    monitoring_thread.start()
 
 @app.middleware("http")
 async def prometheus_metrics_middleware(request: Request, call_next):
