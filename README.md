@@ -4,7 +4,7 @@
 
 Este projeto apresenta um pipeline MLOps completo para ranqueamento de candidatos a vagas de emprego, integrando técnicas modernas de machine learning e práticas robustas de engenharia de MLOps. Desenvolvido como Trabalho de Conclusão do curso de **Pós-graduação em Machine Learning Engineering da FIAP**, o sistema exemplifica a implementação, monitoramento e avaliação de modelos de machine learning em ambiente produtivo.
 
-A solução utiliza um modelo de **Learning-to-Rank** com LightGBM para classificar candidatos conforme sua compatibilidade com vagas específicas, fundamentando-se em dados históricos de contratações e desempenho em processos seletivos anteriores. Vale ressaltar, que há necessida 
+A solução utiliza um modelo de **Learning-to-Rank** com LightGBM para classificar candidatos conforme sua compatibilidade com vagas específicas, fundamentando-se em dados históricos de contratações e desempenho em processos seletivos anteriores. 
 
 ### TLDR - Execução Rápida
 
