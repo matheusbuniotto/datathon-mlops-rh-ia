@@ -19,20 +19,31 @@ def list_vagas():
     logger.info("[API] Requisição recebida para listagem de vagas")
 
     try:
-        # Use absolute paths based on project root
         data_path = os.path.join(PROJECT_ROOT, "data/final/test_candidates_raw.parquet")
 
         logger.info(f"Loading data from: {data_path}")
 
-        # Load the data
         df = pd.read_parquet(data_path)
 
-        # Get unique vaga IDs
-        unique_vagas = sorted(df["codigo_vaga"].unique().tolist())
+        # Count unique vagas and their candidate counts
+        vaga_stats = df.groupby("codigo_vaga").size().reset_index(name="candidate_count")
+        vaga_stats = vaga_stats.sort_values("codigo_vaga")
+        
+        # Convert to list of dictionaries
+        vagas_list = vaga_stats.to_dict("records")
+        
+        # Convert numpy int64 to regular int for JSON serialization
+        for vaga in vagas_list:
+            vaga["codigo_vaga"] = int(vaga["codigo_vaga"])
+            vaga["candidate_count"] = int(vaga["candidate_count"])
 
-        logger.success(f"[API] Found {len(unique_vagas)} unique vagas")
+        logger.success(f"[API] Found {len(vagas_list)} unique vagas with candidate counts")
 
-        return {"total_vagas": len(unique_vagas), "vaga_ids": unique_vagas}
+        return {
+            "total_vagas": len(vagas_list), 
+            "total_candidates": int(len(df)),
+            "vagas": vagas_list
+        }
 
     except FileNotFoundError as e:
         logger.error(f"[API] Arquivo não encontrado: {str(e)}")
@@ -45,11 +56,11 @@ def list_vagas():
 
 
 @router.get("/recommend_ranked")
+@router.get("/predict")
 def recommend_ranked(vaga_id: int = Query(...), top_n: int = Query(5)):
     logger.info(f"[API] Requisição recebida: vaga_id={vaga_id}, top_n={top_n}")
 
     try:
-        # Use absolute paths based on project root
         data_path = os.path.join(PROJECT_ROOT, "data/final/test_candidates_raw.parquet")
         model_path = os.path.join(PROJECT_ROOT, "models/lgbm_ranker.pkl")
         pipeline_path = os.path.join(PROJECT_ROOT, "models/feature_pipeline.joblib")
@@ -59,7 +70,7 @@ def recommend_ranked(vaga_id: int = Query(...), top_n: int = Query(5)):
         # Carrega os dados
         df = pd.read_parquet(data_path)
 
-        # Log production data for monitoring
+        # Log para grafana e monitoramento
         monitoring_data_path = os.path.join(PROJECT_ROOT, "data/monitoring")
         os.makedirs(monitoring_data_path, exist_ok=True)
         df.to_parquet(os.path.join(monitoring_data_path, "production_data.parquet"))
