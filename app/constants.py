@@ -1,22 +1,55 @@
 # Ordens para OrdinalEncoder
 
 NIVEL_PROFISSIONAL_ORDER = [
-    "Aprendiz", "Trainee", "Auxiliar", "Assistente", "Técnico de Nível Médio", "Estagiário",
-    "Júnior", "Analista", "Pleno", "Especialista", "Líder", "Coordenador",
-    "Supervisor", "Sênior", "Gerente"
+    "Aprendiz",
+    "Trainee",
+    "Auxiliar",
+    "Assistente",
+    "Técnico de Nível Médio",
+    "Estagiário",
+    "Júnior",
+    "Analista",
+    "Pleno",
+    "Especialista",
+    "Líder",
+    "Coordenador",
+    "Supervisor",
+    "Sênior",
+    "Gerente",
 ]
 
 NIVEL_ACADEMICO_ORDER = [
-    "Ensino Fundamental Incompleto", "Ensino Fundamental Cursando", "Ensino Fundamental Completo",
-    "Ensino Médio Incompleto", "Ensino Médio Cursando", "Ensino Médio Completo",
-    "Ensino Técnico Incompleto", "Ensino Técnico Cursando", "Ensino Técnico Completo",
-    "Ensino Superior Incompleto", "Ensino Superior Cursando", "Ensino Superior Completo",
-    "Pós Graduação Incompleto", "Pós Graduação Cursando", "Pós Graduação Completo",
-    "Mestrado Incompleto", "Mestrado Cursando", "Mestrado Completo",
-    "Doutorado Incompleto", "Doutorado Cursando", "Doutorado Completo"
+    "Ensino Fundamental Incompleto",
+    "Ensino Fundamental Cursando",
+    "Ensino Fundamental Completo",
+    "Ensino Médio Incompleto",
+    "Ensino Médio Cursando",
+    "Ensino Médio Completo",
+    "Ensino Técnico Incompleto",
+    "Ensino Técnico Cursando",
+    "Ensino Técnico Completo",
+    "Ensino Superior Incompleto",
+    "Ensino Superior Cursando",
+    "Ensino Superior Completo",
+    "Pós Graduação Incompleto",
+    "Pós Graduação Cursando",
+    "Pós Graduação Completo",
+    "Mestrado Incompleto",
+    "Mestrado Cursando",
+    "Mestrado Completo",
+    "Doutorado Incompleto",
+    "Doutorado Cursando",
+    "Doutorado Completo",
 ]
 
-NIVEL_INGLES_ORDER = ["Nenhum", "Técnico", "Básico", "Intermediário", "Avançado", "Fluente"]
+NIVEL_INGLES_ORDER = [
+    "Nenhum",
+    "Técnico",
+    "Básico",
+    "Intermediário",
+    "Avançado",
+    "Fluente",
+]
 
 SITUACAO_TO_SCORE = {
     "Contratado pela Decision": 5,
@@ -38,5 +71,5 @@ SITUACAO_TO_SCORE = {
     "Desistiu": 0,
     "Sem interesse nesta vaga": 0,
     "Recusado": 0,
-    None: 0
+    None: 0,
 }

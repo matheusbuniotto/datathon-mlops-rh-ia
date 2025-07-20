@@ -1,6 +1,7 @@
 import os
 import sys
-sys.path.append(os.path.abspath('..'))
+
+sys.path.append(os.path.abspath(".."))
 
 import pytest
 
@@ -25,7 +26,6 @@ def test_load_jobs(data_dir):
     assert "codigo_vaga" in df.columns
     assert "principais_atividades" in df.columns
     assert df["principais_atividades"].str.len().mean() > 10
-
 
 
 def test_load_prospects(data_dir):

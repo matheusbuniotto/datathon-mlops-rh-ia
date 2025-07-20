@@ -12,6 +12,6 @@ setup(
         "joblib",
         "loguru",
         "fastapi",
-        "uvicorn[standard]"
-    ]
+        "uvicorn[standard]",
+    ],
 )

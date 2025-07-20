@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def explode_embeddings(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
@@ -12,9 +13,11 @@ def explode_embeddings(df: pd.DataFrame) -> pd.DataFrame:
     emb_vaga_df = explode_column(df, "emb_vaga", "emb_vaga")
     emb_cv_df = explode_column(df, "emb_cv", "emb_cv")
 
-    df = df.drop(columns=[
-        "emb_vaga", "emb_cv",
-    ])
+    df = df.drop(
+        columns=[
+            "emb_vaga",
+            "emb_cv",
+        ]
+    )
 
     return pd.concat([df, emb_vaga_df, emb_cv_df], axis=1)
-
