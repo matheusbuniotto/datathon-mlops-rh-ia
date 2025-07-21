@@ -6,6 +6,9 @@ data/model_input/
 data/final/
 *.parquet
 
+# Exception: Allow the test dataset for API functionality
+!data/final/test_candidates_raw.parquet
+
 # Specific large files
 todo.md
 test_payload.json
