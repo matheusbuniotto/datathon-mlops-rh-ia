@@ -1,0 +1,1002 @@
+{
+    "numerical": {
+        "nivel_profissional": {
+            "mean": 2.5,
+            "std": 1.0
+        },
+        "nivel_profissional_vaga": {
+            "mean": 2.5,
+            "std": 1.0
+        },
+        "nivel_academico": {
+            "mean": 2.0,
+            "std": 0.8
+        },
+        "nivel_ingles": {
+            "mean": 1.5,
+            "std": 0.7
+        },
+        "nivel_ingles_vaga": {
+            "mean": 1.5,
+            "std": 0.7
+        },
+        "vaga_sap": {
+            "mean": 0.1,
+            "std": 0.3
+        },
+        "area_similarity": {
+            "mean": 0.6,
+            "std": 0.3
+        },
+        "emb_cv_pca_0": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_1": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_2": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_3": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_4": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_5": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_6": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_7": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_8": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_9": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_10": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_11": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_12": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_13": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_14": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_15": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_16": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_17": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_18": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_19": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_20": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_21": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_22": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_23": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_24": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_25": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_26": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_27": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_28": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_29": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_30": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_31": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_32": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_33": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_34": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_35": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_36": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_37": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_38": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_39": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_40": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_41": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_42": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_43": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_44": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_45": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_46": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_47": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_48": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_49": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_50": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_51": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_52": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_53": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_54": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_55": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_56": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_57": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_58": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_59": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_60": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_61": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_62": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_63": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_64": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_65": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_66": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_67": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_68": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_69": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_70": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_71": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_72": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_73": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_cv_pca_74": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_0": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_1": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_2": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_3": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_4": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_5": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_6": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_7": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_8": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_9": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_10": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_11": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_12": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_13": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_14": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_15": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_16": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_17": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_18": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_19": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_20": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_21": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_22": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_23": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_24": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_25": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_26": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_27": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_28": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_29": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_30": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_31": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_32": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_33": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_34": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_35": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_36": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_37": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_38": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_39": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_40": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_41": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_42": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_43": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_44": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_45": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_46": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_47": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_48": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_49": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_50": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_51": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_52": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_53": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_54": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_55": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_56": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_57": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_58": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_59": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_60": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_61": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_62": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_63": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_64": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_65": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_66": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_67": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_68": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_69": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_70": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_71": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_72": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_73": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "emb_vaga_pca_74": {
+            "mean": 0.0,
+            "std": 1.0
+        }
+    },
+    "categorical": {
+        "cliente_Barnes-Woods": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Bell Group": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Bishop-Reed": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Bowers, Oconnor and Williams": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Callahan-Hall": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Chapman, Brown and Hart": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Craig-Webb": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Dougherty-Gilbert": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Glover, Warren and Norris": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Gonzalez and Sons": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Griffith-Webb": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Jenkins-Walker": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Jimenez PLC": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Johnson-Aguirre": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Johnson-Pratt": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Jones-Hodges": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_King-Russell": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Luna-Carpenter": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Mann and Sons": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Miller, Tran and Chang": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Miller-Curry": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Morris, Moran and Dodson": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Morrison Ltd": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Nelson-Page": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Porter-Wilson": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Wade, Bernard and Bailey": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Walters Group": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_Williams, Clark and Lynn": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "cliente_infrequent_sklearn": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Agatha Montenegro": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Ana Camargo": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Ana Lívia Moreira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Ana Sophia Oliveira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Aylla Leão": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Carlos Eduardo Ribeiro": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Carolina Araújo": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Caroline Machado": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Clara Rios": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Dr. Luan Sá": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Dra. Luara Siqueira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Elisa Barbosa": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Elisa Nunes": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Eloah Leão": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Emanuella Campos": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Emanuelly Vieira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Helena Barros": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Juliana Cassiano": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Lara Duarte": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Laura Pacheco": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Liz Freitas": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Luara Câmara": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Luna Correia": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Lunna Fonseca": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Manuella Carvalho": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Maria Clara Pires": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Maria Vitória Machado": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Mariah Vasconcelos": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Mariane Moreira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Melina Montenegro": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Natália Cavalcanti": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Paulo Peixoto": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Raquel Vieira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Sra. Giovanna Sousa": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Sra. Joana Sousa": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Sra. Manuella Oliveira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Srta. Bella Ferreira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Srta. Maria Carvalho": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Stella Vieira": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Yasmin da Rosa": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_Ágatha da Paz": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "recrutador_infrequent_sklearn": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Administrativa": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Comercial": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Financeira/Controladoria": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_Desenvolvimento/Programação": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_Infraestrutura": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Gestão_e_Alocação_de_Recursos_de_TI_TI_SAP": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_Recursos_Humanos": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Arquitetura": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Banco_de_Dados": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Desenvolvimento/Design": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Desenvolvimento/Mobile": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Desenvolvimento/Programação": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Infraestrutura": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Processos_e_Negócios": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Projetos": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Qualidade/Testes": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_SAP": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Sistemas_e_Ferramentas": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_TI_Suporte": {
+            "0": 0.95,
+            "1": 0.05
+        },
+        "vaga_areas_atuacao_clean_infrequent_sklearn": {
+            "0": 0.95,
+            "1": 0.05
+        }
+    }
+}
